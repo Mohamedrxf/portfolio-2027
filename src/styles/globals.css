@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@import './themes/light.css';
+@import './animations.css';
+
+/* Dark theme override */
+[data-theme='dark'] {
+  --color-background: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-elevated: var(--color-neutral-800);
+  --color-border: var(--color-neutral-700);
+  --color-border-subtle: var(--color-neutral-800);
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-950);
+  --color-primary: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-400);
+  --color-primary-active: var(--color-primary-600);
+  --color-secondary: var(--color-secondary-500);
+  --color-secondary-hover: var(--color-secondary-400);
+  --color-secondary-active: var(--color-secondary-600);
+  --color-success: var(--color-secondary-500);
+  --color-warning: #f59e0b;
+  --color-error: var(--color-accent-500);
+  --color-info: var(--color-primary-500);
+  --shadow-primary: 0 4px 14px 0 rgb(79 70 229 / 0.3);
+  --shadow-secondary: 0 4px 14px 0 rgb(20 184 166 / 0.3);
+  --shadow-accent: 0 4px 14px 0 rgb(239 68 68 / 0.3);
+}
+
+/* System preference detection - Dark mode by default */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-background: var(--color-neutral-950);
+    --color-surface: var(--color-neutral-900);
+    --color-surface-elevated: var(--color-neutral-800);
+    --color-border: var(--color-neutral-700);
+    --color-border-subtle: var(--color-neutral-800);
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-300);
+    --color-text-tertiary: var(--color-neutral-500);
+    --color-text-inverse: var(--color-neutral-950);
+    --color-primary: var(--color-primary-500);
+    --color-primary-hover: var(--color-primary-400);
+    --color-primary-active: var(--color-primary-600);
+    --color-secondary: var(--color-secondary-500);
+    --color-secondary-hover: var(--color-secondary-400);
+    --color-secondary-active: var(--color-secondary-600);
+    --color-success: var(--color-secondary-500);
+    --color-warning: #f59e0b;
+    --color-error: var(--color-accent-500);
+    --color-info: var(--color-primary-500);
+    --shadow-primary: 0 4px 14px 0 rgb(79 70 229 / 0.3);
+    --shadow-secondary: 0 4px 14px 0 rgb(20 184 166 / 0.3);
+    --shadow-accent: 0 4px 14px 0 rgb(239 68 68 / 0.3);
+  }
+}
