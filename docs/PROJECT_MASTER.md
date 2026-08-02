@@ -90,7 +90,7 @@ Always consider security implications. Never expose secrets, always validate inp
 | Build Tool | Vite | 6.x | Build Tool & Dev Server |
 | Styling | Tailwind CSS | 4.x | Styling |
 | Animation | Framer Motion | 12.x | UI Animations |
-| Animation | GSAP | 4.x | Advanced Animations |
+| Animation | GSAP | 3.x | Advanced Animations |
 | Smooth Scroll | Lenis | 1.x | Smooth Scrolling |
 | Routing | React Router | 7.x | Client-Side Routing |
 | Icons | React Icons | 5.x | Icon Library |
