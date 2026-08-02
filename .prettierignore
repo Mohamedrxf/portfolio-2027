@@ -1,0 +1,53 @@
+# Prettier ignore file
+# Task 1.9 - Configure Prettier
+
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+
+# Testing
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Cache
+.cache
+.parcel-cache
+.next
+.nuxt
+.vuepress/dist
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Public assets (if they don't need formatting)
+public
+
+# Config files that shouldn't be formatted
+*.min.js
+*.min.css
