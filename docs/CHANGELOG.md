@@ -18,7 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Configured TypeScript with strict mode enabled
   - Set up development scripts (dev, build, preview)
   - Verified project starts successfully on http://localhost:5173
-- Project initialization and architecture planning
+- Project dependencies installation
+  - Installed Tailwind CSS 4.3.3 with PostCSS 8.5.25 and Autoprefixer 10.5.4
+  - Installed Framer Motion 12.43.0 for UI animations
+  - Installed GSAP 3.15.0 for advanced animations
+  - Updated PROJECT_MASTER.md to reflect GSAP 3.x (4.x not yet available)
+  - Installed Lenis 1.3.25 for smooth scrolling (using new 'lenis' package, @studio-freight/lenis deprecated)
+  - Installed React Router DOM 7.18.2 for client-side routing
+  - Installed React Icons 5.7.0 for icon library
+  - Updated package.json with exact versions (no caret/tilde ranges) per PROJECT_MASTER.md requirements
 
 ---
 
@@ -220,5 +228,5 @@ Each release should include:
 
 ---
 
-**Last Updated:** August 2, 2026  
+**Last Updated:** August 2, 2026 (Task 1.2)  
 **Next Update:** After Phase 1 completion

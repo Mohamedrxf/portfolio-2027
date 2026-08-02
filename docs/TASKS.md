@@ -30,9 +30,10 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 ### Tasks
 
 - [x] ✅ Initialize Vite + React + TypeScript project
+- [x] ✅ Install Tailwind CSS dependencies
 - [ ] ⏳ Configure Tailwind CSS
 - [ ] ⏳ Set up folder structure
-- [ ] ⏳ Install dependencies (Framer Motion, GSAP, Lenis, React Router, React Icons)
+- [x] ✅ Install runtime dependencies (Framer Motion, GSAP, Lenis, React Router, React Icons)
 - [ ] ⏳ Configure TypeScript
 - [ ] ⏳ Set up ESLint & Prettier
 - [ ] ⏳ Create base HTML template
@@ -42,7 +43,7 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 ### Deliverables
 
 - [x] ✅ Working development environment
-- [ ] ⏳ All dependencies installed
+- [x] ✅ All dependencies installed
 - [x] ✅ Basic project structure
 - [ ] ⏳ Git repository initialized
 
