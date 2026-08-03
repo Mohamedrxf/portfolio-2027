@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/husky.sh"
+
+# Task 1.11.2 - Configure Husky
+# Task 1.11.3 - Configure lint-staged
+# Pre-commit hook to run linting and formatting on staged files
+
+echo "Running pre-commit checks with lint-staged..."
+
+npx lint-staged
+
+echo "Pre-commit checks passed!"
+

@@ -6,23 +6,23 @@
 
 interface ImportMetaEnv {
   // Application Information
-  readonly VITE_APP_NAME: string
-  readonly VITE_APP_VERSION: string
+  readonly VITE_APP_NAME: string;
+  readonly VITE_APP_VERSION: string;
 
   // API Configuration
-  readonly VITE_API_URL: string
+  readonly VITE_API_URL: string;
 
   // Site Configuration
-  readonly VITE_SITE_URL: string
+  readonly VITE_SITE_URL: string;
 
   // Contact Information
-  readonly VITE_CONTACT_EMAIL: string
+  readonly VITE_CONTACT_EMAIL: string;
 
   // Social Media Links
-  readonly VITE_GITHUB_URL: string
-  readonly VITE_LINKEDIN_URL: string
+  readonly VITE_GITHUB_URL: string;
+  readonly VITE_LINKEDIN_URL: string;
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv;
 }
