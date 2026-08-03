@@ -68,13 +68,59 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 
 ## Phase 2: Core Systems (Week 2)
 
-**Status:** ⏳ Pending  
-**Start Date:** TBD  
+**Status:** 🔄 In Progress  
+**Start Date:** August 3, 2026  
 **End Date:** TBD  
 **Dependencies:** Phase 1 completion
 
 ### Tasks
 
+- [x] ✅ Task 2.1 - Design Tokens Foundation
+  - Created design tokens directory structure under src/lib/constants/designTokens/
+  - Implemented colors.ts with primary, secondary, accent, neutral color palettes
+  - Implemented typography.ts with font families, sizes, weights, line heights, letter spacing
+  - Implemented spacing.ts with complete spacing scale (0-96)
+  - Implemented borders.ts with border radius tokens
+  - Implemented shadows.ts with shadow definitions (base + colored)
+  - Implemented zIndex.ts with z-index scale (dropdown to toast)
+  - Implemented breakpoints.ts with responsive breakpoints (xs to 2xl)
+  - Implemented containers.ts with container widths
+  - Implemented transitions.ts with durations and easing functions
+  - Implemented opacity.ts with opacity scale (0-100)
+  - Implemented blur.ts with blur scale (none to 3xl)
+  - Implemented gradients.ts with gradient definitions (primary, secondary, accent, neutral, mixed, effects)
+  - Created index.ts for centralized exports
+  - Updated src/lib/constants/index.ts to export design tokens
+  - All tokens use CSS custom properties for theme integration
+  - TypeScript types exported for all token categories
+- [x] ✅ Task 2.2.1 - Core UI Foundation
+  - Created Button component with variants (primary, secondary, outline, ghost)
+  - Button supports sizes (sm, md, lg) with appropriate padding and text sizing
+  - Button includes disabled and loading states
+  - Button supports optional leftIcon and rightIcon props
+  - Button includes fullWidth option for full-width buttons
+  - Button uses forwardRef for ref forwarding
+  - Button uses CSS custom properties for colors to support light/dark themes
+  - Created Container component with responsive max-width
+  - Container supports fluid option to disable max-width
+  - Container supports configurable padding (none, sm, md, lg)
+  - Container uses CSS custom properties for container widths
+  - Created Section component with configurable vertical spacing
+  - Section supports background variants (default, surface, surface-elevated, primary, secondary)
+  - Section includes optional container wrapper with configurable padding
+  - Section uses semantic HTML section element
+  - Section uses CSS custom properties for background colors
+  - Created Heading component with h1-h6 support
+  - Heading supports configurable size override (xs to 6xl)
+  - Heading supports configurable alignment (left, center, right)
+  - Heading includes optional subtitle prop
+  - Heading uses semantic HTML heading elements
+  - Heading uses CSS custom properties for text colors
+  - All components use @ imports for internal dependencies
+  - All components are exported through src/components/ui/index.ts
+  - Updated placeholder components (Card, Badge, Modal, Tooltip, ScrollIndicator) to export null
+  - All components follow PROJECT_MASTER.md React and TypeScript standards
+  - No pages, sections, navbar, hero, routing, business logic, or animations created (as required)
 - [ ] ⏳ Implement theme system (CSS variables + Context)
 - [ ] ⏳ Set up Lenis smooth scrolling
 - [ ] ⏳ Create base layout components (Header, Footer, Navigation)
@@ -86,6 +132,8 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 
 ### Deliverables
 
+- [x] ✅ Design tokens system (colors, typography, spacing, borders, shadows, z-index, breakpoints, containers, transitions, opacity, blur, gradients)
+- [x] ✅ Core UI foundation (Button, Container, Section, Heading)
 - [ ] ⏳ Working theme system
 - [ ] ⏳ Smooth scrolling
 - [ ] ⏳ Layout components
@@ -103,7 +151,7 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 
 ### Tasks
 
-- [ ] ⏳ Create Button component with variants
+- [x] ✅ Create Button component with variants (completed in Task 2.2.1)
 - [ ] ⏳ Build Card component
 - [ ] ⏳ Implement Badge component
 - [ ] ⏳ Create Modal component
