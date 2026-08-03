@@ -4,3 +4,4 @@
 export { AppRouter } from './AppRouter';
 export { routes, type RoutePath } from './routes';
 export { routeConfig } from './routeConfig';
+export { navigationConfig, type NavItemConfig } from './navigationConfig';
