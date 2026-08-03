@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/husky.sh"
+
+# Task 1.11.4 - Configure Commitlint
+# Commit-msg hook to enforce conventional commit messages
+
+echo "Validating commit message with commitlint..."
+
+npx --no -- commitlint --edit "$1"
+
+echo "Commit message validation passed!"

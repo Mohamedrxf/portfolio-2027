@@ -1,0 +1,90 @@
+# EditorConfig configuration
+# Task 1.11.1 - Configure EditorConfig
+# This file ensures consistent formatting across all editors and IDEs
+
+# Default settings for all files
+root = true
+
+[*]
+# Character encoding
+charset = utf-8
+
+# Line ending style (lf = Unix, crlf = Windows)
+end_of_line = lf
+
+# Insert final newline at end of file
+insert_final_newline = true
+
+# Trim trailing whitespace
+trim_trailing_whitespace = true
+
+# Indentation style
+indent_style = space
+
+# Indentation size (number of spaces)
+indent_size = 2
+
+# TypeScript files
+[*.ts]
+indent_style = space
+indent_size = 2
+
+# TypeScript JSX files
+[*.tsx]
+indent_style = space
+indent_size = 2
+
+# JavaScript files
+[*.js]
+indent_style = space
+indent_size = 2
+
+# JavaScript JSX files
+[*.jsx]
+indent_style = space
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# CSS files
+[*.css]
+indent_style = space
+indent_size = 2
+
+# Markdown files - keep trailing whitespace for line breaks
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# HTML files
+[*.html]
+indent_style = space
+indent_size = 2
+
+# Makefile - tabs required
+[Makefile]
+indent_style = tab
+
+# Shell scripts
+[*.sh]
+indent_style = space
+indent_size = 2
+
+# Package files
+[package.json]
+indent_style = space
+indent_size = 2
+
+# Config files
+[*.{config.js,config.ts,config.mjs}]
+indent_style = space
+indent_size = 2
