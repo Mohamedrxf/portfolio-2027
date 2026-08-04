@@ -31,8 +31,16 @@ export const navigationConfig: NavItemConfig[] = [
     path: routes.experience,
   },
   {
+    label: 'Education',
+    path: routes.education,
+  },
+  {
     label: 'Certifications',
     path: routes.certifications,
+  },
+  {
+    label: 'Achievements',
+    path: routes.achievements,
   },
   {
     label: 'Contact',

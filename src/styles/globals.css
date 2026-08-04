@@ -21,7 +21,7 @@
   --color-secondary-hover: var(--color-secondary-400);
   --color-secondary-active: var(--color-secondary-600);
   --color-success: var(--color-secondary-500);
-  --color-warning: #f59e0b;
+  --color-warning: var(--color-warning-500);
   --color-error: var(--color-accent-500);
   --color-info: var(--color-primary-500);
   --shadow-primary: 0 4px 14px 0 rgb(79 70 229 / 0.3);
@@ -48,7 +48,7 @@
     --color-secondary-hover: var(--color-secondary-400);
     --color-secondary-active: var(--color-secondary-600);
     --color-success: var(--color-secondary-500);
-    --color-warning: #f59e0b;
+    --color-warning: var(--color-warning-500);
     --color-error: var(--color-accent-500);
     --color-info: var(--color-primary-500);
     --shadow-primary: 0 4px 14px 0 rgb(79 70 229 / 0.3);

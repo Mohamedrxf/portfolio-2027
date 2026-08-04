@@ -11,6 +11,9 @@ export { HamburgerButton } from './HamburgerButton'
 export { MobileDrawer } from './MobileDrawer'
 export { Backdrop } from './Backdrop'
 
+// Footer sub-components
+export { FooterBrand, FooterNavigation, FooterSocials, FooterCopyright } from './Footer/index'
+
 // Placeholder files will be implemented in future tasks
 // export * from './PageTransition'
 // export * from './ScrollProgress'

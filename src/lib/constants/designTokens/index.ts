@@ -1,6 +1,6 @@
 /**
  * Design Tokens - Index
- * 
+ *
  * Centralized export point for all design tokens.
  * Import design tokens from this file to ensure consistent usage across the application.
  */

@@ -1,13 +1,26 @@
 import { forwardRef, HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
+import { FooterBrand } from './Footer/FooterBrand'
+import { FooterNavigation } from './Footer/FooterNavigation'
+import { FooterSocials } from './Footer/FooterSocials'
+import { FooterCopyright } from './Footer/FooterCopyright'
 
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
-  copyright?: React.ReactNode
-  social?: React.ReactNode
+  showBrand?: boolean
+  showNavigation?: boolean
+  showSocials?: boolean
+  showCopyright?: boolean
 }
 
 export const Footer = forwardRef<HTMLElement, FooterProps>(
-  ({ copyright, social, className, ...props }, ref) => {
+  ({
+    showBrand = true,
+    showNavigation = true,
+    showSocials = true,
+    showCopyright = true,
+    className,
+    ...props
+  }, ref) => {
     return (
       <footer
         ref={ref}
@@ -17,30 +30,13 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(
         )}
         {...props}
       >
-        <div className="max-w-[var(--container-xl)] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Copyright placeholder */}
-            {copyright ? (
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                {copyright}
-              </div>
-            ) : (
-              <div className="text-sm text-[var(--color-text-secondary)]">
-                © 2027 Portfolio. All rights reserved.
-              </div>
-            )}
-
-            {/* Social placeholder */}
-            {social ? (
-              <div className="flex items-center space-x-4">{social}</div>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <div className="w-8 h-8 bg-[var(--color-border)] rounded-full" />
-                <div className="w-8 h-8 bg-[var(--color-border)] rounded-full" />
-                <div className="w-8 h-8 bg-[var(--color-border)] rounded-full" />
-              </div>
-            )}
+        <div className="max-w-[var(--container-xl)] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {showBrand && <FooterBrand />}
+            {showNavigation && <FooterNavigation />}
+            {showSocials && <FooterSocials />}
           </div>
+          {showCopyright && <FooterCopyright />}
         </div>
       </footer>
     )

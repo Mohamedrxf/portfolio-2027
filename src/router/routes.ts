@@ -7,7 +7,9 @@ export const routes = {
   skills: '/skills',
   projects: '/projects',
   experience: '/experience',
+  education: '/education',
   certifications: '/certifications',
+  achievements: '/achievements',
   contact: '/contact',
 } as const;
 
