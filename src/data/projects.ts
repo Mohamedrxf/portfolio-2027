@@ -1,2 +1,86 @@
-// Projects data
-// Placeholder for future implementation
+import { BaseEntity, Describable, Categorizable, TechStack, Statusable, Imageable, Linkable } from './types'
+
+export interface Project extends BaseEntity, Describable, Categorizable, TechStack, Statusable, Imageable, Linkable {
+  featured?: boolean
+  duration?: string
+  client?: string
+}
+
+export const projects: Project[] = [
+  {
+    id: 'project-1',
+    title: 'E-Commerce Platform',
+    description: 'A full-stack e-commerce solution with real-time inventory management, payment processing, and analytics dashboard.',
+    category: 'Web Development',
+    status: 'Completed',
+    featured: true,
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis'],
+    duration: '6 months',
+    client: 'Retail Corp',
+    image: undefined,
+    alt: 'E-Commerce Platform',
+    url: 'https://example.com/project1',
+  },
+  {
+    id: 'project-2',
+    title: 'Task Management App',
+    description: 'Collaborative task management application with real-time updates, team workspaces, and productivity tracking.',
+    category: 'Productivity',
+    status: 'In Progress',
+    technologies: ['React', 'TypeScript', 'Firebase', 'Tailwind CSS'],
+    duration: '3 months',
+    image: undefined,
+    alt: 'Task Management App',
+    url: 'https://example.com/project2',
+  },
+  {
+    id: 'project-3',
+    title: 'Healthcare Dashboard',
+    description: 'Patient management system with appointment scheduling, medical records, and telemedicine integration.',
+    category: 'Healthcare',
+    status: 'Completed',
+    technologies: ['Vue.js', 'Python', 'Django', 'AWS'],
+    duration: '8 months',
+    client: 'Health Tech Inc',
+    image: undefined,
+    alt: 'Healthcare Dashboard',
+    url: 'https://example.com/project3',
+  },
+  {
+    id: 'project-4',
+    title: 'Finance Analytics Tool',
+    description: 'Real-time financial data visualization and analysis platform with custom reporting and forecasting capabilities.',
+    category: 'FinTech',
+    status: 'Completed',
+    technologies: ['React', 'D3.js', 'Python', 'PostgreSQL'],
+    duration: '4 months',
+    client: 'Finance Co',
+    image: undefined,
+    alt: 'Finance Analytics Tool',
+    url: 'https://example.com/project4',
+  },
+  {
+    id: 'project-5',
+    title: 'Social Media Mobile App',
+    description: 'Cross-platform mobile application for content sharing with real-time messaging and social features.',
+    category: 'Mobile Development',
+    status: 'In Progress',
+    technologies: ['React Native', 'Firebase', 'GraphQL'],
+    duration: '5 months',
+    image: undefined,
+    alt: 'Social Media Mobile App',
+    url: 'https://example.com/project5',
+  },
+  {
+    id: 'project-6',
+    title: 'AI Content Generator',
+    description: 'Machine learning powered content generation tool for marketing copy, blog posts, and social media content.',
+    category: 'AI/ML',
+    status: 'Planned',
+    technologies: ['Python', 'TensorFlow', 'FastAPI', 'React'],
+    duration: 'TBD',
+    image: undefined,
+    alt: 'AI Content Generator',
+    url: 'https://example.com/project6',
+  },
+]
