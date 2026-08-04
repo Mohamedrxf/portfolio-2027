@@ -10,7 +10,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLElement> {
 }
 
 export const Header = forwardRef<HTMLElement, HeaderProps>(
-  ({ sticky = false, logo, className, children, ...props }, ref) => {
+  ({ sticky = false, logo, className, ...props }, ref) => {
     return (
       <header
         ref={ref}

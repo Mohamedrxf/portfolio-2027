@@ -17,8 +17,8 @@ export * from './viewport'
 // Motion helpers and constants
 export * from './motion'
 
-// Placeholder for future GSAP integration
-// export * from './gsap'
+// GSAP infrastructure
+export * from './gsap'
 
 // Placeholder for future Framer-specific configs
 // export * from './framer'
