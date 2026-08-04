@@ -1,0 +1,6 @@
+export { Contact } from './Contact'
+export { ContactContent } from './ContactContent'
+export { ContactForm } from './ContactForm'
+export { ContactInfo } from './ContactInfo'
+export { ContactSocials } from './ContactSocials'
+export { ContactMap } from './ContactMap'

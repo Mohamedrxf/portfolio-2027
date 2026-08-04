@@ -26,7 +26,7 @@ export const seoDefaults: SEODefaults = {
   author: '',
   language: 'en',
   locale: 'en_US',
-  themeColor: '#000000',
+  themeColor: 'var(--color-neutral-950)',
   canonicalUrl: 'https://example.com',
 };
 
