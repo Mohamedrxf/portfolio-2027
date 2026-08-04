@@ -1,4 +1,10 @@
 // Library exports
 export * from './animations'
+export * from './api'
+export * from './accessibility'
 export * from './constants'
+export * from './performance'
+export * from './seo'
 export * from './utils'
+export * from './logger'
+export * from './config'

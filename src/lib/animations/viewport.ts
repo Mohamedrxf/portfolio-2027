@@ -7,7 +7,7 @@
 
 export type ViewportConfig = {
   once?: boolean
-  amount?: number | 'some' | 'all' | 'most'
+  amount?: number | 'some' | 'all'
   margin?: string
 }
 

@@ -1,2 +1,2 @@
 // Component exports
-// Placeholder for future component exports
+export * from './errors'
