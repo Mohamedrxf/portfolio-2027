@@ -7,6 +7,8 @@ export * from './usePrefetch'
 export * from './useFocusTrap'
 export * from './useKeyboardNavigation'
 export * from './useEscapeKey'
+// Data hooks
+export * from './data'
 // Placeholder files will be implemented in future tasks
 // export * from './useTheme'
 // export * from './useAnimation'

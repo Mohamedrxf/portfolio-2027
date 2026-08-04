@@ -178,6 +178,117 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 
 ### Tasks
 
+- [x] ✅ Task 4.1 - Portfolio Data Layer
+  - Created centralized data architecture in src/data/
+  - Implemented types.ts with common TypeScript interfaces (BaseEntity, TimestampedEntity, Taggable, Categorizable, Datable, Linkable, Describable, Imageable, TechStack, Statusable, ContactInfo, SocialLink, StatItem, HighlightItem)
+  - Created portfolio.ts with Portfolio interface and portfolio data object (name, tagline, role, bio, location, availability, stats, highlights)
+  - Created projects.ts with Project interface and projects array (title, description, category, status, featured, technologies, duration, client, url)
+  - Created skills.ts with Skill, SkillCategory interfaces and skillCategories array (Frontend, Backend, DevOps, Tools, Mobile)
+  - Created experience.ts with Experience interface and experience array (position, company, duration, description, technologies, location, type, current)
+  - Created education.ts with Education interface and education array (institution, degree, field, description, achievements, gpa, location)
+  - Created certifications.ts with Certification interface and certifications array (title, organization, credential, technologies, expirationDate)
+  - Created achievements.ts with Achievement interface and achievements array (title, description, date, category, status, issuer)
+  - Created socials.ts with Social interface and socials array (platform, url, username, icon, visible, order)
+  - Created site.ts with Site, NavigationItem, SEOConfig interfaces and site data object (name, description, url, author, contact, navigation, seo)
+  - Created barrel exports in src/data/index.ts exporting all types and data objects
+  - Updated HeroContent component to consume portfolio data (name, tagline, role, bio)
+  - Updated HeroStats component to consume portfolio stats data
+  - Updated AboutContent component to consume portfolio data (bio, location, availability)
+  - Updated AboutHighlights component to consume portfolio highlights data
+  - Updated AboutStats component to consume portfolio stats data
+  - Updated ProjectsGrid component to consume projects data array
+  - Updated SkillsGrid component to consume skillCategories data
+  - Updated Timeline component to consume experience data array
+  - Updated EducationGrid component to consume education data array
+  - Updated CertificationGrid component to consume certifications data array
+  - Updated AchievementGrid component to consume achievements data array
+  - Updated FooterSocials component to consume socials data array
+  - Updated ContactInfo component to consume site contact data
+  - Updated FeaturedProject component to consume projects data (featured project)
+  - All data exports use strongly typed TypeScript interfaces
+  - No duplicated interfaces - common interfaces reused via types.ts
+  - All data independent from UI - no hardcoded values in components
+  - Components consume data exclusively from src/data using @ imports
+  - Strict TypeScript compliance - no any types
+  - Build passes successfully
+  - TypeScript compilation passes with no errors
+  - Existing UI unchanged - only data consumption updated
+  - No routing changes
+  - No animation changes
+  - No layout modifications
+  - Data layer ready for future CMS/API integration
+- [x] ✅ Task 4.2 - Portfolio Data Hooks
+  - Created src/hooks/data/ directory structure
+  - Implemented usePortfolio.ts hook with personalInfo, stats, highlights, contactInfo and getter functions
+  - Implemented useProjects.ts hook with projects, featuredProjects, recentProjects and query functions (getProjectById, getProjectsByCategory, getProjectsByStatus, getProjectsByTechnology, getAllCategories, getAllTechnologies, getAllStatuses)
+  - Implemented useSkills.ts hook with skills, skillCategories and query functions (getSkillsByCategory, getSkillById, getSkillCategoryById, getTopSkills, getSkillsByLevel, getSkillsWithBadge, getAllCategories, getAllBadges)
+  - Implemented useExperience.ts hook with experiences, currentExperience, pastExperience and query functions (getExperienceById, getExperienceByCompany, getExperienceByType, getExperienceByLocation, getExperienceByTechnology, getAllCompanies, getAllTypes, getAllLocations, getAllTechnologies)
+  - Implemented useEducation.ts hook with education, recentEducation and query functions (getEducationById, getEducationByInstitution, getEducationByDegree, getEducationByField, getEducationByLocation, getAllInstitutions, getAllDegrees, getAllFields, getAllLocations)
+  - Implemented useCertifications.ts hook with certifications, recentCertifications, validCertifications, expiredCertifications and query functions (getCertificationById, getCertificationsByOrganization, getCertificationsByTechnology, getAllOrganizations, getAllTechnologies, getAllCredentials)
+  - Implemented useAchievements.ts hook with achievements, recentAchievements, activeAchievements and query functions (getAchievementById, getAchievementsByCategory, getAchievementsByStatus, getAchievementsByIssuer, getAllCategories, getAllStatuses, getAllIssuers)
+  - Implemented useSocials.ts hook with socials, visibleSocials, primarySocials and query functions (getSocialById, getSocialByPlatform, getSocialsByOrder, getAllPlatforms, getAllIcons)
+  - Created barrel exports in src/hooks/data/index.ts exporting all data hooks
+  - Updated src/hooks/index.ts to export data hooks through barrel export
+  - Updated HeroContent component to use usePortfolio hook (personalInfo)
+  - Updated HeroStats component to use usePortfolio hook (stats)
+  - Updated AboutContent component to use usePortfolio hook (personalInfo)
+  - Updated AboutHighlights component to use usePortfolio hook (highlights)
+  - Updated AboutStats component to use usePortfolio hook (stats)
+  - Updated ProjectsGrid component to use useProjects hook (projects)
+  - Updated FeaturedProject component to use useProjects hook (featuredProjects)
+  - Updated SkillsGrid component to use useSkills hook (skillCategories)
+  - Updated Timeline component to use useExperience hook (experiences)
+  - Updated EducationGrid component to use useEducation hook (education)
+  - Updated CertificationGrid component to use useCertifications hook (certifications)
+  - Updated AchievementGrid component to use useAchievements hook (achievements)
+  - Updated FooterSocials component to use useSocials hook (visibleSocials)
+  - Updated ContactInfo component to use usePortfolio hook (contactInfo)
+  - All hooks consume centralized data from src/data only
+  - All hooks expose typed APIs only with TypeScript types
+  - No data duplication - hooks return new arrays from original data
+  - No data mutation - all data is readonly
+  - Pure functions only - no side effects in hook functions
+  - All components consume hooks instead of importing src/data directly
+  - No UI changes
+  - No routing changes
+  - No animation changes
+  - No styling changes
+  - No duplicated logic or filtering
+  - Strict TypeScript compliance - no any types
+  - Use @ imports only
+  - Architecture remains CMS-ready for future API integration
+- [x] ✅ Task 4.3 - Search, Filter & Query Engine
+  - Created src/lib/query/ directory structure with centralized query layer
+  - Implemented types.ts with TypeScript types for query operations (SortDirection, SortOptions, FilterOptions, SearchOptions, PaginationOptions, PaginationResult, QueryOptions, GenericObject, FieldExtractor, Predicate, Comparator, Transformer)
+  - Implemented search.ts with search utilities (searchByText, fuzzySearch, searchByFields, searchByField)
+  - Implemented filter.ts with filtering utilities (filterByCategory, filterByStatus, filterByTechnology, filterByTag, filterByDate, filterByYear, filterByDateRange, filterByCustom, filterByField, filterByFieldIncludes, filterByFieldValues, filterByBoolean, filterByRange, filterByMin, filterByMax)
+  - Implemented sort.ts with sorting utilities (sortByDate, sortAlphabetically, sortByOrder, sortByPriority, sortByCustom, sortByNumber, sortByBoolean, sortByMultiple, sortByArrayLength)
+  - Implemented pagination.ts with pagination utilities (paginate, getPageCount, hasNext, hasPrevious, getNextPage, getPreviousPage, getFirstPage, getLastPage, getPageRange, getOffset, getLastPageLimit)
+  - Implemented helpers.ts with helper utilities (unique, uniqueBy, groupBy, groupByCustom, countBy, countByCustom, flatten, flattenDeep, chunk, removeDuplicates, removeDuplicatesBy, first, last, at, sample, shuffle, partition, intersection, difference, union)
+  - Implemented index.ts as public API exporting all query utilities
+  - Updated useProjects hook to use query utilities (searchProjects, searchProjectsByFields, filterProjects, filterProjectsByCategory, filterProjectsByStatus, filterProjectsByTechnology, sortProjects, sortProjectsByDate, paginateProjects)
+  - Updated useSkills hook to use query utilities (searchSkills, searchSkillsByFields, filterSkills, filterSkillsByCategory, filterSkillsByBadge, filterSkillsByLevel, sortSkills, sortSkillsByLevel, sortSkillsByName, paginateSkills)
+  - Updated useExperience hook to use query utilities (searchExperience, searchExperienceByFields, filterExperience, filterExperienceByCompany, filterExperienceByType, filterExperienceByLocation, filterExperienceByTechnology, sortExperience, sortExperienceByDate, paginateExperience)
+  - Updated useEducation hook to use query utilities (searchEducation, searchEducationByFields, filterEducation, filterEducationByInstitution, filterEducationByDegree, filterEducationByField, filterEducationByLocation, sortEducation, sortEducationByDate, paginateEducation)
+  - Updated useAchievements hook to use query utilities (searchAchievements, searchAchievementsByFields, filterAchievements, filterAchievementsByCategory, filterAchievementsByStatus, filterAchievementsByIssuer, sortAchievements, sortAchievementsByDate, paginateAchievements)
+  - Updated useCertifications hook to use query utilities (searchCertifications, searchCertificationsByFields, filterCertifications, filterCertificationsByOrganization, filterCertificationsByTechnology, sortCertifications, sortCertificationsByDate, paginateCertifications)
+  - Updated useSocials hook to use query utilities (searchSocials, searchSocialsByFields, filterSocials, filterSocialsByPlatform, filterVisibleSocials, sortSocials, sortSocialsByOrder, paginateSocials)
+  - Updated usePortfolio hook to use query utilities (searchStats, searchStatsByFields, searchHighlights, searchHighlightsByFields, searchContactInfo, searchContactInfoByFields, filterStats, filterHighlights, filterContactInfo, filterContactInfoByType, filterPrimaryContactInfo, sortStats, sortHighlights, sortContactInfo, paginateStats, paginateHighlights, paginateContactInfo)
+  - All query utilities are generic and reusable across all data types
+  - No duplicated query logic - all filtering, searching, and sorting centralized
+  - Pure functions only - no side effects or mutations
+  - Readonly data - all operations return new arrays
+  - Immutable operations - original data never modified
+  - Strict TypeScript compliance - no any types
+  - Use @ imports only
+  - Components use hooks only - no direct query logic in UI
+  - Hooks consume centralized query utilities from src/lib/query
+  - No direct filter/map/sort logic duplicated inside UI components
+  - CMS-ready architecture - query layer abstracts data operations
+  - Build passes successfully
+  - TypeScript compilation passes with no errors
+  - Lint passes with no warnings
+  - Zero duplicated query logic across codebase
 - [ ] ⏳ Build Hero section with parallax
 - [ ] ⏳ Implement text reveal animations
 - [ ] ⏳ Create morphing shapes
@@ -191,6 +302,8 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
 
 ### Deliverables
 
+- [x] ✅ Portfolio data layer with centralized data architecture
+- [x] ✅ Portfolio data hooks layer with typed APIs
 - [ ] ⏳ Complete landing page
 - [ ] ⏳ All sections implemented
 - [ ] ⏳ Animations working
