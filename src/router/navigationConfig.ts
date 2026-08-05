@@ -12,38 +12,38 @@ export interface NavItemConfig {
 export const navigationConfig: NavItemConfig[] = [
   {
     label: 'Home',
-    path: routes.home,
+    path: '#home',
   },
   {
     label: 'About',
-    path: routes.about,
+    path: '#about',
   },
   {
     label: 'Skills',
-    path: routes.skills,
+    path: '#skills',
   },
   {
     label: 'Projects',
-    path: routes.projects,
+    path: '#projects',
   },
   {
     label: 'Experience',
-    path: routes.experience,
+    path: '#experience',
   },
   {
     label: 'Education',
-    path: routes.education,
+    path: '#education',
   },
   {
     label: 'Certifications',
-    path: routes.certifications,
+    path: '#certifications',
   },
   {
     label: 'Achievements',
-    path: routes.achievements,
+    path: '#achievements',
   },
   {
     label: 'Contact',
-    path: routes.contact,
+    path: '#contact',
   },
 ] as const

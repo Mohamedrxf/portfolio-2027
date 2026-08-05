@@ -6,12 +6,13 @@ import { EducationHighlights } from './EducationHighlights'
 
 export const Education = () => {
   return (
-    <AnimatedSection
-      spacing="xl"
-      background="default"
-      withContainer={true}
-      containerPadding="lg"
-    >
+    <section id="education">
+      <AnimatedSection
+        spacing="xl"
+        background="default"
+        withContainer={true}
+        containerPadding="lg"
+      >
       <div className="space-y-12">
         <AnimatedHeading delay={0.1}>
           <Heading level={2} size="4xl" align="center">
@@ -24,5 +25,6 @@ export const Education = () => {
         <EducationHighlights />
       </div>
     </AnimatedSection>
+    </section>
   )
 }

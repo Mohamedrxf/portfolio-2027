@@ -1,6 +1,7 @@
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
 import { Badge } from '@/components/ui/Badge'
 import { HeroScene } from '@/components/three'
+import { ErrorBoundary } from '@/components/errors/ErrorBoundary'
 import { usePortfolio, useSkills } from '@/hooks'
 
 export const HeroImage = () => {
@@ -15,7 +16,20 @@ export const HeroImage = () => {
       <div className="relative w-full max-w-md aspect-square">
         {/* 3D Hero Scene */}
         <div className="w-full h-full rounded-2xl overflow-hidden relative">
-          <HeroScene className="w-full h-full" />
+          <ErrorBoundary
+            fallback={
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10">
+                <div className="text-center p-8">
+                  <div className="text-[var(--color-text-secondary)] text-sm mb-2">
+                    3D scene unavailable
+                  </div>
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[var(--color-primary)]/20" />
+                </div>
+              </div>
+            }
+          >
+            <HeroScene className="w-full h-full" />
+          </ErrorBoundary>
         </div>
 
         {/* Floating technology badges */}

@@ -7,12 +7,13 @@ import { AchievementGrid } from './AchievementGrid'
 
 export const Achievements = () => {
   return (
-    <AnimatedSection
-      spacing="xl"
-      background="surface"
-      withContainer={true}
-      containerPadding="lg"
-    >
+    <section id="achievements">
+      <AnimatedSection
+        spacing="xl"
+        background="surface"
+        withContainer={true}
+        containerPadding="lg"
+      >
       <div className="space-y-12">
         <AnimatedHeading delay={0.1}>
           <Heading level={2} size="4xl" align="center">
@@ -27,5 +28,6 @@ export const Achievements = () => {
         <AchievementGrid />
       </div>
     </AnimatedSection>
+    </section>
   )
 }
