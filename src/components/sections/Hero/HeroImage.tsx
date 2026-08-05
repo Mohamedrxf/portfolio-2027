@@ -1,5 +1,6 @@
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
 import { Badge } from '@/components/ui/Badge'
+import { HeroScene } from '@/components/three'
 import { usePortfolio, useSkills } from '@/hooks'
 
 export const HeroImage = () => {
@@ -12,26 +13,9 @@ export const HeroImage = () => {
   return (
     <AnimatedContainer delay={0.4} className="flex justify-center lg:justify-end relative">
       <div className="relative w-full max-w-md aspect-square">
-        {/* Professional illustration placeholder */}
-        <div className="w-full h-full rounded-2xl bg-gradient-to-br from-[var(--color-primary-100)] to-[var(--color-secondary-100)] dark:from-[var(--color-primary-900)] dark:to-[var(--color-secondary-900)] flex items-center justify-center relative overflow-hidden">
-          {/* Background pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: 'radial-gradient(circle at 2px 2px, var(--color-text-primary) 1px, transparent 0)',
-              backgroundSize: '32px 32px'
-            }} />
-          </div>
-          
-          {/* Profile placeholder */}
-          <div className="relative z-10 text-center">
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-              {availability === 'Open to Opportunities' ? '👋' : '👤'}
-            </div>
-            <p className="mt-4 text-[var(--color-text-secondary)] text-sm">Professional Illustration</p>
-          </div>
-
-          {/* Glow effect */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[var(--color-primary)] opacity-20 blur-3xl rounded-full" />
+        {/* 3D Hero Scene */}
+        <div className="w-full h-full rounded-2xl overflow-hidden relative">
+          <HeroScene className="w-full h-full" />
         </div>
 
         {/* Floating technology badges */}
