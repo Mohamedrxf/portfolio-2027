@@ -18,10 +18,10 @@ export interface AnimatedTextProps {
   staggerChildren?: boolean
 }
 
-export const AnimatedText = forwardRef<HTMLParagraphElement, AnimatedTextProps>(
+export const AnimatedText = forwardRef<HTMLDivElement, AnimatedTextProps>(
   (
     {
-      as = 'p',
+      as = 'div',
       variant = 'fade',
       className,
       children,
