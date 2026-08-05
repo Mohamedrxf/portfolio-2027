@@ -18,13 +18,13 @@ export const AboutContent = () => {
           </Heading>
         </AnimatedHeading>
 
-        <AnimatedText variant="slide-up" delay={0}>
+        <AnimatedText as="p" variant="slide-up" delay={0}>
           <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed">
             {personalInfo.bio}
           </p>
         </AnimatedText>
 
-        <AnimatedText variant="slide-up" delay={0}>
+        <AnimatedText as="p" variant="slide-up" delay={0}>
           <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed">
             Based in {personalInfo.location}, I'm {personalInfo.availability} and passionate about 
             creating exceptional digital experiences that make a real impact.

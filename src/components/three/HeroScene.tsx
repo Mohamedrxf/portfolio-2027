@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { createRenderer, createScene } from '@/lib/three';
-import { disposeScene, disposeRenderer } from '@/lib/three/utils/cleanup';
+import { disposeScene } from '@/lib/three/utils/cleanup';
 import { FloatingGeometry } from './FloatingGeometry';
 import { FloatingParticles } from './FloatingParticles';
 import { Lighting } from './Lighting';
@@ -69,7 +69,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
       environment: null,
       helpers: false,
     });
-    
+
     sceneResult.scene.background = null;
 
     rendererResultRef.current = rendererResult;
@@ -84,11 +84,17 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     }
 
     return () => {
-      rendererResult.dispose();
+      // Clean up renderer - use the built-in dispose which includes context loss
+      if (rendererResultRef.current) {
+        rendererResultRef.current.dispose();
+        rendererResultRef.current = null;
+      }
+      
+      // Clean up scene
       sceneResult.dispose();
-      disposeRenderer(rendererResult.renderer);
       disposeScene(sceneResult.scene);
-      rendererResultRef.current = null;
+      
+      // Clear state
       setRenderer(null);
       setScene(null);
     };
@@ -113,7 +119,11 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
 
   useEffect(() => {
     if (rendererResultRef.current && dimensions.width > 0 && dimensions.height > 0) {
-      rendererResultRef.current.resize(dimensions.width, dimensions.height);
+      try {
+        rendererResultRef.current.resize(dimensions.width, dimensions.height);
+      } catch (error) {
+        console.error('Error resizing renderer:', error);
+      }
     }
   }, [dimensions]);
 
@@ -121,17 +131,26 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     if (!scene || !camera || !renderer) return;
 
     let animationFrameId: number;
+    let isMounted = true;
 
     const render = () => {
-      if (isTabVisible.current) {
-        renderer.render(scene, camera);
+      if (isMounted && isTabVisible.current && renderer && scene && camera) {
+        try {
+          renderer.render(scene, camera);
+        } catch (error) {
+          console.error('Error rendering scene:', error);
+          isMounted = false;
+        }
       }
-      animationFrameId = requestAnimationFrame(render);
+      if (isMounted) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
+      isMounted = false;
       cancelAnimationFrame(animationFrameId);
     };
   }, [scene, camera, renderer]);
