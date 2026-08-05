@@ -27,11 +27,13 @@ export interface Datable {
 export interface Linkable {
   url?: string
   link?: string
+  github?: string
 }
 
 export interface Describable {
   title: string
   description: string
+  resume?: string
 }
 
 export interface Imageable {

@@ -8,15 +8,15 @@ export const AboutHighlights = () => {
 
   return (
     <div className="space-y-4">
-      <AnimatedContainer delay={0.5}>
+      <AnimatedContainer delay={0}>
         <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">
           Key Highlights
         </h3>
       </AnimatedContainer>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {highlights.map((highlight, index) => (
-          <AnimatedCard key={highlight.title} delay={0.6 + index * 0.1} cardVariant="default" className="h-full">
+        {highlights.map((highlight) => (
+          <AnimatedCard key={highlight.title} delay={0} cardVariant="hoverable" className="h-full">
             <div className="space-y-3">
               <Badge variant="primary" size="sm">
                 {highlight.badge}

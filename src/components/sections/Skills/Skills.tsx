@@ -1,10 +1,24 @@
+import { useState } from 'react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { AnimatedHeading } from '@/components/animations/AnimatedHeading'
 import { Heading } from '@/components/ui/Heading'
-import { SkillsGrid } from './SkillsGrid'
-import { SkillsLegend } from './SkillsLegend'
+import { SkillCategoryTabs } from './SkillCategoryTabs'
+import { CategoryStatistics } from './CategoryStatistics'
+import { FeaturedSkills } from './FeaturedSkills'
+import { SkillsByCategory } from './SkillsByCategory'
+import { useSkills } from '@/hooks'
 
 export const Skills = () => {
+  const { skills, skillCategories, filterSkillsByCategory, getSkillsByLevel } = useSkills()
+  const [activeCategory, setActiveCategory] = useState('all')
+
+  const filteredSkills = activeCategory === 'all' 
+    ? skills 
+    : filterSkillsByCategory(activeCategory)
+
+  const expertSkills = getSkillsByLevel(5)
+  const maxYears = Math.max(...skills.map(s => s.years || 0))
+
   return (
     <AnimatedSection
       spacing="xl"
@@ -19,9 +33,22 @@ export const Skills = () => {
           </Heading>
         </AnimatedHeading>
 
-        <SkillsGrid />
+        <CategoryStatistics
+          totalSkills={skills.length}
+          expertSkills={expertSkills.length}
+          categories={skillCategories.length}
+          yearsOfExperience={maxYears}
+        />
 
-        <SkillsLegend />
+        <FeaturedSkills />
+
+        <SkillCategoryTabs
+          categories={skillCategories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
+
+        <SkillsByCategory skills={filteredSkills} />
       </div>
     </AnimatedSection>
   )

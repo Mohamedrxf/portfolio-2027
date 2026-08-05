@@ -15,6 +15,7 @@ export interface AnimatedContainerProps {
   initial?: string
   animate?: string
   exit?: string
+  style?: React.CSSProperties
 }
 
 export const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerProps>(
@@ -30,6 +31,7 @@ export const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerPro
       initial = 'hidden',
       animate = 'visible',
       exit = 'exit',
+      style,
     },
     ref
   ) => {
@@ -45,6 +47,7 @@ export const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerPro
           className={cn(className)}
           initial="visible"
           animate="visible"
+          style={style}
         >
           {children}
         </motion.div>
@@ -61,6 +64,7 @@ export const AnimatedContainer = forwardRef<HTMLDivElement, AnimatedContainerPro
         exit={exit}
         transition={transition}
         viewport={once ? (defaultViewport as any) : undefined}
+        style={style}
       >
         {children}
       </MotionComponent>

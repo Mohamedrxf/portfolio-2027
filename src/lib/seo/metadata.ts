@@ -3,6 +3,8 @@
  * Provides utilities for building and combining metadata
  */
 
+import { truncate } from '@/lib/content';
+
 export interface MetadataConfig {
   title?: string;
   description?: string;
@@ -81,8 +83,5 @@ export const formatTitle = (title: string, template?: string): string => {
 };
 
 export const truncateDescription = (description: string, maxLength: number = 160): string => {
-  if (description.length <= maxLength) {
-    return description;
-  }
-  return description.slice(0, maxLength - 3).trim() + '...';
+  return truncate(description, maxLength);
 };

@@ -277,11 +277,31 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
   - All query utilities are generic and reusable across all data types
   - No duplicated query logic - all filtering, searching, and sorting centralized
   - Pure functions only - no side effects or mutations
-  - Readonly data - all operations return new arrays
-  - Immutable operations - original data never modified
-  - Strict TypeScript compliance - no any types
+- [x] ✅ Task 4.4 - Content Utilities
+  - Created src/lib/content/ directory structure with centralized content utility layer
+  - Implemented dates.ts with date utilities (formatDate, formatMonthYear, formatRelativeDate, formatDuration, getYear, isCurrent)
+  - Implemented text.ts with text utilities (truncate, excerpt, capitalize, capitalizeWords, sentenceCase, titleCase, removeHtml, wordCount, readingTime)
+  - Implemented strings.ts with string utilities (isEmpty, isBlank, removeExtraSpaces, kebabCase, camelCase, pascalCase, snakeCase)
+  - Implemented numbers.ts with number utilities (formatNumber, formatPercentage, clamp, round, random, randomInt)
+  - Implemented urls.ts with URL utilities (normalizeUrl, isExternalUrl, getDomain, openInNewTab)
+  - Implemented slug.ts with slug utilities (createSlug, parseSlug, compareSlug)
+  - Implemented clipboard.ts with clipboard utilities (copyToClipboard, copyText)
+  - Implemented files.ts with file utilities (formatFileSize, getFileExtension, isImage, isPdf)
+  - Implemented helpers.ts with helper utilities (debounce, throttle, sleep, noop)
+  - Implemented index.ts as public API exporting all content utilities
+  - Updated src/lib/index.ts to export content utilities
+  - Updated src/lib/seo/metadata.ts to use truncate utility from content layer
+  - All utilities are pure functions with no side effects
+  - All utilities are generic and reusable across the application
+  - Components and hooks can now consume centralized formatting utilities
+  - No duplicated formatting logic - all formatting centralized in src/lib/content/
+  - Strict TypeScript compliance - all utilities are fully typed
   - Use @ imports only
-  - Components use hooks only - no direct query logic in UI
+  - No UI changes
+  - No styling changes
+  - No routing changes
+  - No animation changes
+  - Architecture remains CMS-ready for future content integration
   - Hooks consume centralized query utilities from src/lib/query
   - No direct filter/map/sort logic duplicated inside UI components
   - CMS-ready architecture - query layer abstracts data operations
@@ -289,6 +309,56 @@ This document tracks all tasks for the Portfolio 2027 project. Tasks are organiz
   - TypeScript compilation passes with no errors
   - Lint passes with no warnings
   - Zero duplicated query logic across codebase
+- [x] ✅ Task 4.4 - Content Utilities
+  - Created src/lib/content/ directory structure with centralized content utility layer
+  - Implemented dates.ts with date utilities (formatDate, formatMonthYear, formatRelativeDate, formatDuration, getYear, isCurrent)
+  - Implemented text.ts with text utilities (truncate, excerpt, capitalize, capitalizeWords, sentenceCase, titleCase, removeHtml, wordCount, readingTime)
+  - Implemented strings.ts with string utilities (isEmpty, isBlank, removeExtraSpaces, kebabCase, camelCase, pascalCase, snakeCase)
+  - Implemented numbers.ts with number utilities (formatNumber, formatPercentage, clamp, round, random, randomInt)
+  - Implemented urls.ts with URL utilities (normalizeUrl, isExternalUrl, getDomain, openInNewTab)
+  - Implemented slug.ts with slug utilities (createSlug, parseSlug, compareSlug)
+  - Implemented clipboard.ts with clipboard utilities (copyToClipboard, copyText)
+  - Implemented files.ts with file utilities (formatFileSize, getFileExtension, isImage, isPdf)
+  - Implemented helpers.ts with helper utilities (debounce, throttle, sleep, noop)
+  - Implemented index.ts as public API exporting all content utilities
+  - Updated src/lib/index.ts to export content utilities
+  - Updated src/lib/seo/metadata.ts to use truncate utility from content layer
+  - All utilities are pure functions with no side effects
+  - All utilities are generic and reusable across the application
+  - Components and hooks can now consume centralized formatting utilities
+  - No duplicated formatting logic - all formatting centralized in src/lib/content/
+  - Strict TypeScript compliance - all utilities are fully typed
+  - Use @ imports only
+  - No UI changes
+  - No styling changes
+  - No routing changes
+  - No animation changes
+  - Architecture remains CMS-ready for future content integration
+- [x] ✅ Task 4.4 - Content Utilities
+  - Created src/lib/content/ directory structure with centralized content utility layer
+  - Implemented dates.ts with date utilities (formatDate, formatMonthYear, formatRelativeDate, formatDuration, getYear, isCurrent)
+  - Implemented text.ts with text utilities (truncate, excerpt, capitalize, capitalizeWords, sentenceCase, titleCase, removeHtml, wordCount, readingTime)
+  - Implemented strings.ts with string utilities (isEmpty, isBlank, removeExtraSpaces, kebabCase, camelCase, pascalCase, snakeCase)
+  - Implemented numbers.ts with number utilities (formatNumber, formatPercentage, clamp, round, random, randomInt)
+  - Implemented urls.ts with URL utilities (normalizeUrl, isExternalUrl, getDomain, openInNewTab)
+  - Implemented slug.ts with slug utilities (createSlug, parseSlug, compareSlug)
+  - Implemented clipboard.ts with clipboard utilities (copyToClipboard, copyText)
+  - Implemented files.ts with file utilities (formatFileSize, getFileExtension, isImage, isPdf)
+  - Implemented helpers.ts with helper utilities (debounce, throttle, sleep, noop)
+  - Implemented index.ts as public API exporting all content utilities
+  - Updated src/lib/index.ts to export content utilities
+  - Updated src/lib/seo/metadata.ts to use truncate utility from content layer
+  - All utilities are pure functions with no side effects
+  - All utilities are generic and reusable across the application
+  - Components and hooks can now consume centralized formatting utilities
+  - No duplicated formatting logic - all formatting centralized in src/lib/content/
+  - Strict TypeScript compliance - all utilities are fully typed
+  - Use @ imports only
+  - No UI changes
+  - No styling changes
+  - No routing changes
+  - No animation changes
+  - Architecture remains CMS-ready for future content integration
 - [ ] ⏳ Build Hero section with parallax
 - [ ] ⏳ Implement text reveal animations
 - [ ] ⏳ Create morphing shapes

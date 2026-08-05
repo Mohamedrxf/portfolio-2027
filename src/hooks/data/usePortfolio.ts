@@ -1,4 +1,4 @@
-import { portfolio, site, type StatItem, type HighlightItem, type ContactInfo } from '@/data'
+﻿import { portfolio, site, type StatItem, type HighlightItem, type ContactInfo } from '@/data'
 import {
   filterByField,
   searchByText,
@@ -104,6 +104,7 @@ export const usePortfolio = () => {
   }
 
   return {
+    portfolio,
     personalInfo,
     stats,
     highlights,

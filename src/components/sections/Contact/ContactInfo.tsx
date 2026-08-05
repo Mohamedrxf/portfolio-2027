@@ -1,9 +1,21 @@
+import { useState } from 'react'
 import { AnimatedCard } from '@/components/animations/AnimatedCard'
 import { Badge } from '@/components/ui/Badge'
 import { usePortfolio } from '@/hooks'
 
 export const ContactInfo = () => {
   const { contactInfo } = usePortfolio()
+  const [copiedEmail, setCopiedEmail] = useState(false)
+
+  const copyEmailToClipboard = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopiedEmail(true)
+      setTimeout(() => setCopiedEmail(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy email:', err)
+    }
+  }
 
   return (
     <AnimatedCard delay={0.2} cardVariant="default" className="h-full">
@@ -125,9 +137,20 @@ export const ContactInfo = () => {
                 <h4 className="font-semibold text-[var(--color-text-primary)] mb-1">
                   {contact.label}
                 </h4>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  {contact.value}
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    {contact.value}
+                  </p>
+                  {contact.type === 'email' && (
+                    <button
+                      onClick={() => copyEmailToClipboard(contact.value)}
+                      className="text-xs text-[var(--color-primary)] hover:underline"
+                      aria-label="Copy email to clipboard"
+                    >
+                      {copiedEmail ? 'Copied!' : 'Copy'}
+                    </button>
+                  )}
+                </div>
                 <Badge variant={getBadgeVariant(contact.type)} size="sm" className="mt-2">
                   {getBadgeText(contact.type)}
                 </Badge>

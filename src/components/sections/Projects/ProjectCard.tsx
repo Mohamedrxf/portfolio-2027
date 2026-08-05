@@ -9,6 +9,8 @@ interface ProjectCardProps {
   technologies: string[]
   category: string
   status: string
+  url?: string
+  github?: string
   delay: number
 }
 
@@ -18,15 +20,30 @@ export const ProjectCard = ({
   technologies,
   category,
   status,
+  url,
+  github,
   delay,
 }: ProjectCardProps) => {
   return (
-    <AnimatedCard delay={delay} cardVariant="default" className="h-full">
+    <AnimatedCard 
+      delay={delay} 
+      cardVariant="default" 
+      className="h-full hover:shadow-lg transition-shadow duration-300"
+    >
       <div className="space-y-4">
-        <div className="aspect-video bg-[var(--color-surface-elevated)] rounded-lg flex items-center justify-center">
-          <span className="text-[var(--color-text-secondary)] text-sm">
-            Project Image Placeholder
-          </span>
+        <div className="aspect-video bg-[var(--color-surface-elevated)] rounded-lg flex items-center justify-center overflow-hidden">
+          {url ? (
+            <img 
+              src={url} 
+              alt={`${title} screenshot`} 
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          ) : (
+            <span className="text-[var(--color-text-secondary)] text-sm">
+              Project Image Placeholder
+            </span>
+          )}
         </div>
 
         <div className="space-y-3">
@@ -49,7 +66,7 @@ export const ProjectCard = ({
             <Badge variant="secondary" size="sm">
               {category}
             </Badge>
-            <ProjectActions />
+            <ProjectActions url={url} github={github} />
           </div>
         </div>
       </div>

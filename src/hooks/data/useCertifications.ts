@@ -92,7 +92,7 @@ export const useCertifications = () => {
   }
 
   const getAllCredentials = (): string[] => {
-    return certifications.map((cert) => cert.credential)
+    return certifications.map((cert) => cert.credential || '').filter(Boolean)
   }
 
   return {

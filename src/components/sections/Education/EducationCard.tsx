@@ -41,7 +41,7 @@ export const EducationCard = ({
           {description}
         </p>
 
-        <div className="space-y-2">
+        {(gpa && gpa !== 'N/A') && (
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-[var(--color-text-primary)]">
               GPA:
@@ -50,7 +50,9 @@ export const EducationCard = ({
               {gpa}
             </Badge>
           </div>
+        )}
 
+        {achievements && achievements.length > 0 && (
           <div className="space-y-2">
             <span className="text-sm font-medium text-[var(--color-text-primary)]">
               Achievements:
@@ -63,7 +65,7 @@ export const EducationCard = ({
               ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </AnimatedCard>
   )
