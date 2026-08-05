@@ -277,36 +277,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Strict TypeScript compliance - no any types
   - Use @ imports only
   - Components use hooks only - no direct query logic in UI
-  - Hooks consume centralized query utilities from src/lib/query
-  - No direct filter/map/sort logic duplicated inside UI components
-  - CMS-ready architecture - query layer abstracts data operations
   - Build passes successfully
   - TypeScript compilation passes with no errors
   - Lint passes with no warnings
   - Zero duplicated query logic across codebase
+- Task 4.4 - Content Utilities
+  - Created src/lib/content/ directory structure with centralized content utility layer
+  - Implemented dates.ts with date utilities
+    - formatDate: Format date to localized string with Intl.DateTimeFormat
+    - formatMonthYear: Format date to month and year only
+    - formatRelativeDate: Format date as relative time (e.g., "2 days ago")
+    - formatDuration: Format duration in milliseconds to human-readable string (locale parameter removed - not used)
+    - getYear: Extract year from date
+    - isCurrent: Check if date is in current year
+  - Implemented text.ts with text utilities
+    - truncate: Truncate text to specified length with ellipsis
+    - excerpt: Extract excerpt with first N words
+    - capitalize: Capitalize first character
+    - capitalizeWords: Capitalize first character of each word
+    - sentenceCase: Convert to sentence case
+    - titleCase: Convert to title case (major words capitalized)
+    - removeHtml: Remove HTML tags from text
+    - wordCount: Count words in text
+    - readingTime: Estimate reading time in minutes
+  - Implemented strings.ts with string utilities
+    - isEmpty: Check if string is empty (length === 0)
+    - isBlank: Check if string is blank (empty or whitespace only)
+    - removeExtraSpaces: Remove extra spaces (collapse multiple spaces to single)
+    - kebabCase: Convert to kebab-case (lowercase with hyphens)
+    - camelCase: Convert to camelCase
+    - pascalCase: Convert to PascalCase
+    - snakeCase: Convert to snake_case (lowercase with underscores)
+  - Implemented numbers.ts with number utilities
+    - formatNumber: Format number with locale-specific formatting
+    - formatPercentage: Format number as percentage
+    - clamp: Clamp number between min and max values
+    - round: Round number to specified decimal places
+    - random: Generate random number between min and max
+    - randomInt: Generate random integer between min and max
+  - Implemented urls.ts with URL utilities
+    - normalizeUrl: Normalize URL by ensuring it has a protocol
+    - isExternalUrl: Check if URL is external (different domain)
+    - getDomain: Get domain from URL
+    - openInNewTab: Open URL in new tab with security attributes
+  - Implemented slug.ts with slug utilities
+    - createSlug: Create URL-friendly slug from string
+    - parseSlug: Parse slug back to readable string
+    - compareSlug: Compare two slugs for equality (case-insensitive)
+  - Implemented clipboard.ts with clipboard utilities
+    - copyToClipboard: Copy text to clipboard with fallback for older browsers
+    - copyText: Alias for copyToClipboard
+  - Implemented files.ts with file utilities
+    - formatFileSize: Format file size to human-readable string (locale parameter removed - not used)
+    - getFileExtension: Get file extension from filename
+    - isImage: Check if file is an image based on extension
+    - isPdf: Check if file is a PDF based on extension
+  - Implemented helpers.ts with helper utilities
+    - debounce: Debounce function execution
+    - throttle: Throttle function execution
+    - sleep: Sleep for specified milliseconds
+    - noop: No-op function (does nothing)
+  - Implemented index.ts as public API exporting all content utilities
+  - Updated src/lib/index.ts to export content utilities
+  - Updated src/lib/seo/metadata.ts to use truncate utility from content layer
+  - All utilities are pure functions with no side effects
+  - All utilities are generic and reusable across the application
+  - Components and hooks can now consume centralized formatting utilities
+  - No duplicated formatting logic - all formatting centralized in src/lib/content/
+  - Strict TypeScript compliance - all utilities are fully typed
+  - Use @ imports only
+  - No UI changes
+  - No styling changes
+  - No routing changes
+  - No animation changes
+  - Architecture remains CMS-ready for future content integration
 
 ### Changed
 
-- Component data access pattern
-  - HeroContent: Changed from direct portfolio import to usePortfolio hook
-  - HeroStats: Changed from direct portfolio.stats import to usePortfolio hook
-  - AboutContent: Changed from direct portfolio import to usePortfolio hook
-  - AboutHighlights: Changed from direct portfolio.highlights import to usePortfolio hook
-  - AboutStats: Changed from direct portfolio.stats import to usePortfolio hook
-  - ProjectsGrid: Changed from direct projects import to useProjects hook
-  - FeaturedProject: Changed from direct projects.find to useProjects hook
-  - SkillsGrid: Changed from direct skillCategories import to useSkills hook
-  - Timeline: Changed from direct experience import to useExperience hook
-  - EducationGrid: Changed from direct education import to useEducation hook
-  - CertificationGrid: Changed from direct certifications import to useCertifications hook
-  - AchievementGrid: Changed from direct achievements import to useAchievements hook
-  - FooterSocials: Changed from direct socials.filter to useSocials hook
-  - ContactInfo: Changed from direct site.contact import to usePortfolio hook
-- Data access architecture
-  - Added abstraction layer between src/data and UI components
-  - Components now access data through typed hook APIs instead of direct imports
-  - Centralized data filtering and query logic in hooks
-  - Improved type safety and reusability
+- Metadata truncation implementation
+  - Updated src/lib/seo/metadata.ts truncateDescription to use centralized truncate utility
+  - Removed duplicate truncate logic in favor of src/lib/content/text utility
+- Content access pattern
+  - Components and hooks can now consume centralized formatting utilities from src/lib/content
+  - Formatting logic centralized in dedicated utility layer
 
 ---
 

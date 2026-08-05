@@ -1,23 +1,32 @@
 import { AnimatedCard } from '@/components/animations/AnimatedCard'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
 import { useProjects } from '@/hooks'
 
 export const FeaturedProject = () => {
   const { featuredProjects } = useProjects()
   const featuredProject = featuredProjects[0]
 
+  if (!featuredProject) return null
+
   return (
-    <AnimatedCard delay={0.2} cardVariant="elevated" className="h-full">
+    <AnimatedCard 
+      delay={0.2} 
+      cardVariant="elevated" 
+      className="h-full hover:shadow-xl transition-shadow duration-300"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="aspect-video lg:aspect-auto bg-[var(--color-surface-elevated)] rounded-lg flex items-center justify-center">
-          <span className="text-[var(--color-text-secondary)] text-sm">
-            {featuredProject.image ? (
-              <img src={featuredProject.image} alt={featuredProject.alt || featuredProject.title} className="w-full h-full object-cover rounded-lg" />
-            ) : (
-              'Featured Project Image Placeholder'
-            )}
-          </span>
+        <div className="aspect-video lg:aspect-auto bg-[var(--color-surface-elevated)] rounded-lg flex items-center justify-center overflow-hidden">
+          {featuredProject.image ? (
+            <img 
+              src={featuredProject.image} 
+              alt={featuredProject.alt || featuredProject.title} 
+              className="w-full h-full object-cover rounded-lg"
+            />
+          ) : (
+            <span className="text-[var(--color-text-secondary)] text-sm">
+              Featured Project Image Placeholder
+            </span>
+          )}
         </div>
 
         <div className="space-y-4 flex flex-col justify-center">
@@ -47,19 +56,28 @@ export const FeaturedProject = () => {
           </div>
 
           <div className="flex gap-3 pt-2">
+            {featuredProject.github && (
+              <a
+                href={featuredProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-4 py-2 text-base font-medium border-2 border-[var(--color-border)] bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-border)] rounded-md transition-colors"
+                aria-label="View GitHub repository"
+              >
+                GitHub
+              </a>
+            )}
             {featuredProject.url && (
               <a
                 href={featuredProject.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-4 py-2 text-base font-medium border-2 border-[var(--color-border)] bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-border)] rounded-md transition-colors"
+                className="inline-flex items-center justify-center px-4 py-2 text-base font-medium bg-[var(--color-primary)] text-[var(--color-text-inverse)] hover:bg-[var(--color-primary-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] rounded-md transition-colors"
+                aria-label="View live demo"
               >
-                View Project
+                Live Demo
               </a>
             )}
-            <Button variant="primary" size="md">
-              Live Demo
-            </Button>
           </div>
         </div>
       </div>

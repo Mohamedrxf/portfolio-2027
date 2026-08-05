@@ -13,8 +13,8 @@ export const socials: Social[] = [
   {
     id: 'social-1',
     platform: 'GitHub',
-    url: 'https://github.com/johndoe',
-    username: 'johndoe',
+    url: 'https://github.com/Mohamedrxf',
+    username: 'Mohamedrxf',
     icon: 'github',
     visible: true,
     order: 1,
@@ -22,8 +22,8 @@ export const socials: Social[] = [
   {
     id: 'social-2',
     platform: 'LinkedIn',
-    url: 'https://linkedin.com/in/johndoe',
-    username: 'johndoe',
+    url: 'https://linkedin.com/in/yourusername',
+    username: 'yourusername',
     icon: 'linkedin',
     visible: true,
     order: 2,
@@ -31,8 +31,8 @@ export const socials: Social[] = [
   {
     id: 'social-3',
     platform: 'Twitter',
-    url: 'https://twitter.com/johndoe',
-    username: 'johndoe',
+    url: 'https://twitter.com/yourusername',
+    username: 'yourusername',
     icon: 'twitter',
     visible: true,
     order: 3,
@@ -40,8 +40,8 @@ export const socials: Social[] = [
   {
     id: 'social-4',
     platform: 'Email',
-    url: 'mailto:contact@example.com',
-    username: undefined,
+    url: 'mailto:your.email@example.com',
+    username: 'your.email@example.com',
     icon: 'email',
     visible: true,
     order: 4,

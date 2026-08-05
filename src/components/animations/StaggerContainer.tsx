@@ -87,3 +87,5 @@ export const StaggerContainer = forwardRef<HTMLDivElement, StaggerContainerProps
 )
 
 StaggerContainer.displayName = 'StaggerContainer'
+
+export { StaggerItem } from './StaggerItem'

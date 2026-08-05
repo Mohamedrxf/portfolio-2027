@@ -1,9 +1,11 @@
 import { ProjectCard } from './ProjectCard'
-import { useProjects } from '@/hooks'
+import type { Project } from '@/data'
 
-export const ProjectsGrid = () => {
-  const { projects } = useProjects()
+interface ProjectsGridProps {
+  projects: Project[]
+}
 
+export const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => (
@@ -14,6 +16,8 @@ export const ProjectsGrid = () => {
           technologies={project.technologies}
           category={project.category}
           status={project.status}
+          url={project.url}
+          github={project.github}
           delay={0.4 + index * 0.1}
         />
       ))}

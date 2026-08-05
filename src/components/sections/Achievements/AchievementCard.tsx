@@ -6,7 +6,7 @@ interface AchievementCardProps {
   description: string
   date: string
   category: string
-  status: string
+  status?: string
   delay: number
 }
 
@@ -56,9 +56,11 @@ export const AchievementCard = ({
           <Badge variant="secondary" size="sm">
             {category}
           </Badge>
-          <Badge variant="success" size="sm">
-            {status}
-          </Badge>
+          {status && (
+            <Badge variant="success" size="sm">
+              {status}
+            </Badge>
+          )}
         </div>
       </div>
     </AnimatedCard>

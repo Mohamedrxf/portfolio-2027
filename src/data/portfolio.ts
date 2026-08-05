@@ -9,46 +9,48 @@ export interface Portfolio extends BaseEntity, Describable, Imageable {
   availability: string
   stats: StatItem[]
   highlights: HighlightItem[]
+  resume?: string
 }
 
 export const portfolio: Portfolio = {
   id: 'portfolio-1',
-  name: 'John Doe',
+  name: 'Your Name',
   tagline: 'Hello, I\'m',
-  role: 'Full Stack Developer',
+  role: 'Aspiring Software and Network Engineer',
   title: 'Portfolio',
   description: 'Professional portfolio showcasing projects, skills, and experience',
-  bio: 'I build exceptional digital experiences that combine beautiful design with powerful functionality. Passionate about creating user-centric solutions that make a real impact.',
-  location: 'San Francisco, CA',
-  availability: 'Open to Projects',
+  bio: 'Aspiring Software and Network Engineer with hands-on experience in building secure full-stack applications, AI-powered platforms, and distributed systems. Strong foundation in enterprise networking, TCP/IP, routing, switching, Linux, REST APIs, cloud technologies, virtualization, and cybersecurity. Passionate about solving enterprise networking, infrastructure, automation, and customer-facing technical challenges through scalable and secure solutions.',
+  location: 'Remote / Worldwide',
+  availability: 'Open to Opportunities',
   image: undefined,
   alt: 'Profile picture',
+  resume: '/resume.pdf',
   stats: [
-    { value: '5+', label: 'Years Experience' },
-    { value: '50+', label: 'Projects Completed' },
-    { value: '30+', label: 'Happy Clients' },
-    { value: '10+', label: 'Awards Won' },
+    { value: '3', label: 'Projects' },
+    { value: '2', label: 'Internships' },
+    { value: '5', label: 'Certifications' },
+    { value: '3', label: 'Hackathon Awards' },
   ],
   highlights: [
     {
-      title: 'Expertise',
-      description: 'Placeholder highlight about technical expertise and specialization areas.',
-      badge: 'Expertise',
+      title: 'Enterprise Networking',
+      description: 'Strong foundation in TCP/IP, routing, switching, VLANs, ACLs, NAT, VPN, DNS, DHCP, and network troubleshooting.',
+      badge: 'Networking',
     },
     {
-      title: 'Experience',
-      description: 'Placeholder highlight about professional experience and industry knowledge.',
-      badge: 'Experience',
+      title: 'Full Stack Development',
+      description: 'Experience building secure full-stack applications using React, FastAPI, Node.js, and REST APIs with proper authentication mechanisms.',
+      badge: 'Development',
     },
     {
-      title: 'Approach',
-      description: 'Placeholder highlight about methodology and work approach.',
-      badge: 'Approach',
+      title: 'AI & Security',
+      description: 'Developed machine learning models for cybersecurity threat detection and vulnerability classification using TensorFlow and FAISS.',
+      badge: 'AI Security',
     },
     {
-      title: 'Values',
-      description: 'Placeholder highlight about core values and professional principles.',
-      badge: 'Values',
+      title: 'Cloud & DevOps',
+      description: 'Proficient in AWS, Azure, Docker, Linux, Git, and containerization for building scalable distributed systems.',
+      badge: 'Cloud',
     },
   ],
 }

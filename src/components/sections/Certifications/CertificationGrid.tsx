@@ -12,7 +12,7 @@ export const CertificationGrid = () => {
           title={cert.title}
           organization={cert.organization}
           issueDate={cert.date}
-          credential={cert.credential}
+          credential={cert.credential || ''}
           technologies={cert.technologies}
           delay={0.2 + index * 0.1}
         />

@@ -1,10 +1,11 @@
 import { AnimatedText } from '@/components/animations/AnimatedText'
 import { Heading } from '@/components/ui/Heading'
+import { Badge } from '@/components/ui/Badge'
 import { HeroActions } from './HeroActions'
 import { usePortfolio } from '@/hooks'
 
 export const HeroContent = () => {
-  const { personalInfo } = usePortfolio()
+  const { personalInfo, highlights } = usePortfolio()
 
   return (
     <div className="space-y-6">
@@ -21,9 +22,14 @@ export const HeroContent = () => {
       </AnimatedText>
 
       <AnimatedText variant="slide-up" delay={0.3}>
-        <Heading level={2} size="2xl" className="text-[var(--color-text-secondary)] font-normal">
-          {personalInfo.role}
-        </Heading>
+        <div className="flex items-center gap-3 flex-wrap">
+          <Heading level={2} size="2xl" className="text-[var(--color-text-secondary)] font-normal">
+            {personalInfo.role}
+          </Heading>
+          <Badge variant="primary" size="md" className="animate-pulse">
+            {personalInfo.availability}
+          </Badge>
+        </div>
       </AnimatedText>
 
       <AnimatedText variant="slide-up" delay={0.4}>
@@ -33,6 +39,16 @@ export const HeroContent = () => {
       </AnimatedText>
 
       <AnimatedText variant="slide-up" delay={0.5}>
+        <div className="flex flex-wrap gap-2 mb-6">
+          {highlights.slice(0, 3).map((highlight) => (
+            <Badge key={highlight.title} variant="outline" size="sm" className="text-xs">
+              {highlight.badge}
+            </Badge>
+          ))}
+        </div>
+      </AnimatedText>
+
+      <AnimatedText variant="slide-up" delay={0.6}>
         <HeroActions />
       </AnimatedText>
     </div>
