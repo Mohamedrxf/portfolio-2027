@@ -9,12 +9,13 @@ export const Projects = () => {
   useProjects()
 
   return (
-    <AnimatedSection
-      spacing="xl"
-      background="default"
-      withContainer={true}
-      containerPadding="lg"
-    >
+    <section id="projects">
+      <AnimatedSection
+        spacing="xl"
+        background="default"
+        withContainer={true}
+        containerPadding="lg"
+      >
       <div className="space-y-12 relative">
         <AnimatedHeading delay={0.1}>
           <Heading level={2} size="4xl" align="center">
@@ -27,5 +28,6 @@ export const Projects = () => {
         <ProjectShowcase showBackground={true} />
       </div>
     </AnimatedSection>
+    </section>
   )
 }

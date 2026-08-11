@@ -15,9 +15,12 @@ export * from './Slide'
 export { StaggerContainer } from './StaggerContainer'
 export { StaggerItem } from './StaggerItem'
 
+// Premium motion components
+export { MagneticButton } from './MagneticButton'
+export { CursorFollower } from './CursorFollower'
+export { SpotlightCard } from './SpotlightCard'
+
 // Placeholder files will be implemented in future tasks
-// export * from './MagneticButton'
 // export * from './TextReveal'
 // export * from './ParallaxSection'
-// export * from './CursorFollower'
 // export * from './MorphingShape'

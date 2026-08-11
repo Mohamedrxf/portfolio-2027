@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { createRenderer, createScene } from '@/lib/three';
 import { disposeScene } from '@/lib/three/utils/cleanup';
+import { getRuntimeConfig } from '@/lib/config/runtime';
 import { FloatingGeometry } from './FloatingGeometry';
 import { FloatingParticles } from './FloatingParticles';
 import { Lighting } from './Lighting';
@@ -20,7 +21,11 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>(null);
   const [scene, setScene] = useState<THREE.Scene | null>(null);
   const [renderer, setRenderer] = useState<THREE.WebGLRenderer | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const rendererResultRef = useRef<ReturnType<typeof createRenderer> | null>(null);
+  const isMountedRef = useRef(true);
+  const initializationRef = useRef(false);
   
   const isMobile = useMediaQuery('(max-width: 768px)');
   const isTablet = useMediaQuery('(max-width: 1024px)');
@@ -46,57 +51,93 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   }, []);
 
   useEffect(() => {
+    // Prevent double initialization in React StrictMode
+    if (initializationRef.current) {
+      return;
+    }
+    initializationRef.current = true;
+
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.warn('Canvas element not found');
+      setError('Canvas element not found');
+      return;
+    }
 
-    const rendererResult = createRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      pixelRatio: window.devicePixelRatio,
-      maxPixelRatio: 2,
-      powerPreference: 'high-performance',
-      shadowMapEnabled: true,
-      shadowMapType: THREE.PCFSoftShadowMap,
-      outputColorSpace: THREE.SRGBColorSpace,
-      toneMapping: THREE.ACESFilmicToneMapping,
-      toneMappingExposure: 1,
-    });
+    // Check WebGL support
+    const runtimeConfig = getRuntimeConfig();
+    if (!runtimeConfig.supports.webGL) {
+      console.error('WebGL is not supported');
+      setError('WebGL is not supported in this browser');
+      return;
+    }
 
-    const sceneResult = createScene({
-      background: null,
-      fog: null,
-      environment: null,
-      helpers: false,
-    });
+    try {
+      const rendererResult = createRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        pixelRatio: window.devicePixelRatio,
+        maxPixelRatio: 2,
+        powerPreference: 'high-performance',
+        shadowMapEnabled: true,
+        shadowMapType: THREE.PCFSoftShadowMap,
+        outputColorSpace: THREE.SRGBColorSpace,
+        toneMapping: THREE.ACESFilmicToneMapping,
+        toneMappingExposure: 1,
+      });
 
-    sceneResult.scene.background = null;
+      const sceneResult = createScene({
+        background: null,
+        fog: null,
+        environment: null,
+        helpers: false,
+      });
 
-    rendererResultRef.current = rendererResult;
-    setRenderer(rendererResult.renderer);
-    setScene(sceneResult.scene);
+      sceneResult.scene.background = null;
 
-    const container = canvas.parentElement;
-    if (container) {
-      const { clientWidth, clientHeight } = container;
-      setDimensions({ width: clientWidth, height: clientHeight });
-      rendererResult.resize(clientWidth, clientHeight);
+      rendererResultRef.current = rendererResult;
+      setRenderer(rendererResult.renderer);
+      setScene(sceneResult.scene);
+      setIsInitialized(true);
+
+      const container = canvas.parentElement;
+      if (container) {
+        const { clientWidth, clientHeight } = container;
+        setDimensions({ width: clientWidth, height: clientHeight });
+        rendererResult.resize(clientWidth, clientHeight);
+      }
+    } catch (err) {
+      console.error('Failed to initialize Three.js renderer:', err);
+      setError(err instanceof Error ? err.message : 'Failed to initialize renderer');
     }
 
     return () => {
+      isMountedRef.current = false;
+      
       // Clean up renderer - use the built-in dispose which includes context loss
       if (rendererResultRef.current) {
-        rendererResultRef.current.dispose();
+        try {
+          rendererResultRef.current.dispose();
+        } catch (err) {
+          console.error('Error disposing renderer:', err);
+        }
         rendererResultRef.current = null;
       }
       
       // Clean up scene
-      sceneResult.dispose();
-      disposeScene(sceneResult.scene);
+      if (scene) {
+        try {
+          disposeScene(scene);
+        } catch (err) {
+          console.error('Error disposing scene:', err);
+        }
+      }
       
       // Clear state
       setRenderer(null);
       setScene(null);
+      setIsInitialized(false);
     };
   }, []);
 
@@ -105,6 +146,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     if (!container) return;
 
     const handleResize = () => {
+      if (!isMountedRef.current) return;
       const { clientWidth, clientHeight } = container;
       setDimensions({ width: clientWidth, height: clientHeight });
     };
@@ -118,6 +160,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   }, []);
 
   useEffect(() => {
+    if (!isMountedRef.current) return;
     if (rendererResultRef.current && dimensions.width > 0 && dimensions.height > 0) {
       try {
         rendererResultRef.current.resize(dimensions.width, dimensions.height);
@@ -128,21 +171,22 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   }, [dimensions]);
 
   useEffect(() => {
+    if (!isMountedRef.current) return;
     if (!scene || !camera || !renderer) return;
 
     let animationFrameId: number;
-    let isMounted = true;
+    let isRenderLoopMounted = true;
 
     const render = () => {
-      if (isMounted && isTabVisible.current && renderer && scene && camera) {
+      if (isRenderLoopMounted && isMountedRef.current && isTabVisible.current && renderer && scene && camera) {
         try {
           renderer.render(scene, camera);
         } catch (error) {
           console.error('Error rendering scene:', error);
-          isMounted = false;
+          isRenderLoopMounted = false;
         }
       }
-      if (isMounted) {
+      if (isRenderLoopMounted && isMountedRef.current) {
         animationFrameId = requestAnimationFrame(render);
       }
     };
@@ -150,16 +194,32 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      isMounted = false;
+      isRenderLoopMounted = false;
       cancelAnimationFrame(animationFrameId);
     };
   }, [scene, camera, renderer]);
 
   const handleCameraReady = useCallback((cam: THREE.PerspectiveCamera) => {
-    setCamera(cam);
+    if (isMountedRef.current) {
+      setCamera(cam);
+    }
   }, []);
 
   const animationEnabled = !prefersReducedMotion;
+
+  // Render static placeholder if WebGL is not supported or initialization failed
+  if (error || !isInitialized) {
+    return (
+      <div className={`relative w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 ${className}`}>
+        <div className="text-center p-8">
+          <div className="text-[var(--color-text-secondary)] text-sm mb-2">
+            {error || 'Loading 3D scene...'}
+          </div>
+          <div className="w-16 h-16 mx-auto rounded-full bg-[var(--color-primary)]/20 animate-pulse" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative w-full h-full ${className}`}>
@@ -168,7 +228,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
         className="w-full h-full"
         aria-hidden="true"
       />
-      {scene && (
+      {scene && isInitialized && (
         <>
           <Lighting scene={scene} />
           <FloatingGeometry scene={scene} enabled={animationEnabled} />

@@ -7,12 +7,13 @@ import { ContactMap } from './ContactMap'
 
 export const Contact = () => {
   return (
-    <AnimatedSection
-      spacing="xl"
-      background="surface"
-      withContainer={true}
-      containerPadding="lg"
-    >
+    <section id="contact">
+      <AnimatedSection
+        spacing="xl"
+        background="surface"
+        withContainer={true}
+        containerPadding="lg"
+      >
       <div className="space-y-12">
         <AnimatedHeading delay={0.1}>
           <Heading level={2} size="4xl" align="center">
@@ -28,5 +29,6 @@ export const Contact = () => {
         <ContactMap />
       </div>
     </AnimatedSection>
+    </section>
   )
 }

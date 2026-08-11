@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatedCard } from '@/components/animations/AnimatedCard'
+import { SpotlightCard } from '@/components/animations/SpotlightCard'
 import { Badge } from '@/components/ui/Badge'
 import { usePortfolio } from '@/hooks'
 
@@ -18,7 +18,7 @@ export const ContactInfo = () => {
   }
 
   return (
-    <AnimatedCard delay={0.2} cardVariant="default" className="h-full">
+    <SpotlightCard className="h-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10">
       <div className="space-y-4">
         {contactInfo.map((contact) => {
           const getIcon = (type: string) => {
@@ -159,6 +159,6 @@ export const ContactInfo = () => {
           )
         })}
       </div>
-    </AnimatedCard>
+    </SpotlightCard>
   )
 }

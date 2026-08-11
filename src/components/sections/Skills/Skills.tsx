@@ -32,12 +32,13 @@ export const Skills = () => {
   }
 
   return (
-    <AnimatedSection
-      spacing="xl"
-      background="default"
-      withContainer={true}
-      containerPadding="lg"
-    >
+    <section id="skills">
+      <AnimatedSection
+        spacing="xl"
+        background="default"
+        withContainer={true}
+        containerPadding="lg"
+      >
       <div className="space-y-12">
         <AnimatedHeading delay={0.1}>
           <Heading level={2} size="4xl" align="center">
@@ -70,5 +71,6 @@ export const Skills = () => {
         <SkillsByCategory skills={filteredSkills} />
       </div>
     </AnimatedSection>
+    </section>
   )
 }
