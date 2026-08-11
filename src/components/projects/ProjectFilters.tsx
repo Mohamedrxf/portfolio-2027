@@ -1,5 +1,6 @@
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer';
 import { cn } from '@/lib/utils';
+import type { Project } from '@/data/projects';
 
 interface ProjectFiltersProps {
   categories: string[];
@@ -10,6 +11,7 @@ interface ProjectFiltersProps {
   onCategoryChange: (category: string) => void;
   onTechnologyChange: (technology: string | null) => void;
   onFeaturedToggle: (featured: boolean) => void;
+  projects?: Project[];
 }
 
 export const ProjectFilters = ({
@@ -21,7 +23,16 @@ export const ProjectFilters = ({
   onCategoryChange,
   onTechnologyChange,
   onFeaturedToggle,
+  projects = [],
 }: ProjectFiltersProps) => {
+  // Calculate category counts
+  const categoryCounts = categories.reduce((acc, category) => {
+    acc[category] = projects.filter(p => p.category === category).length;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const allCount = projects.length;
+
   return (
     <div className="space-y-6 px-4">
       {/* Category Filters */}
@@ -40,7 +51,7 @@ export const ProjectFilters = ({
                 : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300'
             )}
           >
-            All Projects
+            All ({allCount})
           </button>
           {categories.map((category) => (
             <button
@@ -57,7 +68,7 @@ export const ProjectFilters = ({
                   : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300'
               )}
             >
-              {category}
+              {category} ({categoryCounts[category] || 0})
             </button>
           ))}
         </div>

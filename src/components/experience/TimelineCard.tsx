@@ -1,6 +1,8 @@
-﻿import { useRef, useEffect, useState } from 'react'
-import { useReducedMotion } from '@/hooks'
+﻿import { useReducedMotion } from '@/hooks'
 import { Badge } from '@/components/ui/Badge'
+import { SpotlightCard } from '@/components/animations/SpotlightCard'
+import { motion } from 'framer-motion'
+import { ANIMATION_CONSTANTS } from '@/lib/constants/animations'
 import type { Experience } from '@/data'
 
 interface TimelineCardProps {
@@ -8,6 +10,7 @@ interface TimelineCardProps {
   isActive: boolean
   onMouseEnter: () => void
   onMouseLeave: () => void
+  index: number
 }
 
 export const TimelineCard = ({
@@ -15,119 +18,98 @@ export const TimelineCard = ({
   isActive,
   onMouseEnter,
   onMouseLeave,
+  index,
 }: TimelineCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null)
   const prefersReducedMotion = useReducedMotion()
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    if (prefersReducedMotion || !cardRef.current) return
-
-    const card = cardRef.current
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect()
-      const x = (e.clientX - rect.left) / rect.width - 0.5
-      const y = (e.clientY - rect.top) / rect.height - 0.5
-      setMousePosition({ x, y })
-    }
-
-    const handleMouseLeave = () => {
-      setMousePosition({ x: 0, y: 0 })
-    }
-
-    card.addEventListener('mousemove', handleMouseMove)
-    card.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove)
-      card.removeEventListener('mouseleave', handleMouseLeave)
-    }
-  }, [prefersReducedMotion])
-
-  const parallaxStyle = prefersReducedMotion
-    ? {}
-    : {
-        transform: 'perspective(1000px) rotateX(' + String(-mousePosition.y * 5) + 'deg) rotateY(' + String(mousePosition.x * 5) + 'deg) scale3d(' + String(isActive ? 1.02 : 1) + ', ' + String(isActive ? 1.02 : 1) + ', 1)',
-        transition: 'transform 0.3s ease-out',
-      }
 
   return (
-    <div
-      ref={cardRef}
-      className={'relative p-6 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 shadow-2xl transition-all duration-500 ease-out ' + (isActive ? 'ring-2 ring-[var(--color-primary)] ring-offset-2 ring-offset-[var(--color-surface)]' : 'hover:ring-1 hover:ring-[var(--color-primary)]/50')}
-      style={parallaxStyle}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: ANIMATION_CONSTANTS.duration.normal,
+        delay: index * ANIMATION_CONSTANTS.stagger.normal,
+        ease: ANIMATION_CONSTANTS.easing.easeOut,
+      }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      role='article'
-      aria-label={experience.position + ' at ' + experience.company}
-      tabIndex={0}
     >
-      <div className='space-y-4'>
-        <div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2'>
-          <div>
-            <h3 className='text-xl font-semibold text-[var(--color-text-primary)]'>
-              {experience.position}
-            </h3>
-            <p className='text-[var(--color-text-secondary)]'>
-              {experience.company}
-            </p>
-          </div>
-          <Badge variant='outline' size='sm'>
-            {experience.date}
-          </Badge>
-        </div>
-
-        <p className='text-[var(--color-text-secondary)] leading-relaxed'>
-          {experience.description}
-        </p>
-
-        {experience.responsibilities && experience.responsibilities.length > 0 && (
-          <div>
-            <h4 className='text-sm font-semibold text-[var(--color-text-primary)] mb-2'>
-              Responsibilities
-            </h4>
-            <ul className='space-y-1'>
-              {experience.responsibilities.map((responsibility, idx) => (
-                <li
-                  key={idx}
-                  className='text-sm text-[var(--color-text-secondary)] flex items-start gap-2'
-                >
-                  <span className='text-[var(--color-primary)] mt-1'>•</span>
-                  <span>{responsibility}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {experience.achievements && experience.achievements.length > 0 && (
-          <div>
-            <h4 className='text-sm font-semibold text-[var(--color-text-primary)] mb-2'>
-              Key Achievements
-            </h4>
-            <ul className='space-y-1'>
-              {experience.achievements.map((achievement, idx) => (
-                <li
-                  key={idx}
-                  className='text-sm text-[var(--color-text-secondary)] flex items-start gap-2'
-                >
-                  <span className='text-[var(--color-primary)] mt-1'>✓</span>
-                  <span>{achievement}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <div className='flex flex-wrap gap-2'>
-          {experience.technologies.map((tech) => (
-            <Badge key={tech} variant='secondary' size='sm'>
-              {tech}
+      <SpotlightCard
+        className={`
+          relative p-6 rounded-2xl backdrop-blur-xl 
+          bg-gradient-to-br from-white/10 to-white/5 
+          border border-white/20 shadow-2xl 
+          transition-all duration-500 ease-out
+          ${isActive ? 'shadow-[var(--color-primary)]/20 scale-[1.02]' : 'hover:shadow-lg hover:scale-[1.01]'}
+        `}
+        disabled={prefersReducedMotion}
+      >
+        <div className='space-y-4'>
+          <div className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2'>
+            <div className='flex-1'>
+              <h3 className='text-2xl font-bold text-[var(--color-text-primary)] mb-1'>
+                {experience.company}
+              </h3>
+              <p className='text-lg font-semibold text-[var(--color-primary)]'>
+                {experience.position}
+              </p>
+            </div>
+            <Badge variant='outline' size='sm' className='shrink-0'>
+              {experience.date}
             </Badge>
-          ))}
+          </div>
+
+          {experience.achievements && experience.achievements.length > 0 && (
+            <div className='space-y-2'>
+              <h4 className='text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wide'>
+                Key Achievements
+              </h4>
+              <ul className='space-y-2'>
+                {experience.achievements.map((achievement, idx) => (
+                  <li
+                    key={idx}
+                    className='text-sm text-[var(--color-text-secondary)] flex items-start gap-2 font-medium'
+                  >
+                    <span className='text-[var(--color-primary)] mt-0.5 text-base'>✓</span>
+                    <span className='leading-relaxed'>{achievement}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {experience.responsibilities && experience.responsibilities.length > 0 && (
+            <div className='space-y-2'>
+              <h4 className='text-sm font-semibold text-[var(--color-text-primary)] uppercase tracking-wide'>
+                Responsibilities
+              </h4>
+              <ul className='space-y-1'>
+                {experience.responsibilities.map((responsibility, idx) => (
+                  <li
+                    key={idx}
+                    className='text-sm text-[var(--color-text-secondary)] flex items-start gap-2'
+                  >
+                    <span className='text-[var(--color-primary)] mt-1'>•</span>
+                    <span className='leading-relaxed'>{responsibility}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {experience.technologies && experience.technologies.length > 0 && (
+            <div className='pt-2'>
+              <div className='flex flex-wrap gap-2'>
+                {experience.technologies.map((tech) => (
+                  <Badge key={tech} variant='secondary' size='sm'>
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    </div>
+      </SpotlightCard>
+    </motion.div>
   )
 }

@@ -4,6 +4,7 @@ export interface Project extends BaseEntity, Describable, Categorizable, TechSta
   featured?: boolean
   duration?: string
   client?: string
+  award?: string
 }
 
 export const projects: Project[] = [
@@ -16,6 +17,7 @@ export const projects: Project[] = [
     featured: true,
     technologies: ['React', 'FastAPI', 'FAISS', 'LLaMA3'],
     url: 'https://github.com/KR0079384/OS3',
+    award: 'Hacknova \'26 Special Jury Award (Cybersecurity)',
   },
   {
     id: 'project-2',

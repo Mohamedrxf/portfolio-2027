@@ -98,10 +98,15 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
                 <h2 id="project-title" className="text-2xl font-bold text-slate-900 dark:text-white">
                   {project.title}
                 </h2>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   {project.featured && (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
                       Featured
+                    </span>
+                  )}
+                  {project.award && (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                      🏆 {project.award}
                     </span>
                   )}
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
@@ -168,7 +173,6 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
               </div>
               <ProjectActions
                 url={project.url}
-                github={project.github}
               />
             </div>
           </AnimatedContainer>

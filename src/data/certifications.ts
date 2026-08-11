@@ -5,6 +5,7 @@ export interface Certification extends BaseEntity, Describable, Datable, TechSta
   credential?: string
   credentialUrl?: string
   expirationDate?: string
+  category?: string
 }
 
 export const certifications: Certification[] = [
@@ -17,6 +18,7 @@ export const certifications: Certification[] = [
     date: '2026',
     technologies: ['Networking', 'Routing', 'Switching', 'Security'],
     url: 'https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/ccna.html',
+    category: 'Security',
   },
   {
     id: 'cert-2',
@@ -27,6 +29,7 @@ export const certifications: Certification[] = [
     date: '2026',
     technologies: ['Cybersecurity', 'Network Security', 'Threat Intelligence'],
     url: 'https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/intro-cybersecurity.html',
+    category: 'Security',
   },
   {
     id: 'cert-3',
@@ -37,6 +40,7 @@ export const certifications: Certification[] = [
     date: '2026',
     technologies: ['Python', 'Programming', 'Data Structures'],
     url: 'https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/python-essentials.html',
+    category: 'Development',
   },
   {
     id: 'cert-4',
@@ -47,6 +51,7 @@ export const certifications: Certification[] = [
     date: '2026',
     technologies: ['AWS', 'Cloud Computing', 'Security'],
     url: 'https://aws.amazon.com/certification/cloud-practitioner/',
+    category: 'Cloud',
   },
   {
     id: 'cert-5',
@@ -57,5 +62,6 @@ export const certifications: Certification[] = [
     date: '2026',
     technologies: ['Azure', 'Cloud Computing', 'Microsoft'],
     url: 'https://learn.microsoft.com/en-us/certifications/exams/az-900/',
+    category: 'Cloud',
   },
 ]
