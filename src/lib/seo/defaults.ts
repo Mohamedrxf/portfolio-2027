@@ -23,11 +23,11 @@ export const seoDefaults: SEODefaults = {
   defaultDescription:
     'A modern portfolio showcasing projects, skills, and professional experience.',
   keywords: ['portfolio', 'developer', 'projects', 'skills', 'experience'],
-  author: '',
+  author: 'Mohamed Rafeeq Khan A',
   language: 'en',
   locale: 'en_US',
   themeColor: 'var(--color-neutral-950)',
-  canonicalUrl: 'https://example.com',
+  canonicalUrl: '',
 };
 
 export const getSEODefaults = (overrides?: Partial<SEODefaults>): SEODefaults => {

@@ -125,6 +125,6 @@ export const useSmoothScroll = (options: UseSmoothScrollOptions = {}) => {
     }
   }
 
-  return { scrollTo, lenis: lenisRef.current }
+  return { scrollTo, getLenis: () => lenisRef.current }
 }
 

@@ -10,7 +10,7 @@ interface StorySectionProps {
 }
 
 export const StorySection = ({ id, title, children, delay = 0, alternate = false }: StorySectionProps) => {
-  const sectionClass = 'relative py-20 px-4 ' + (alternate ? 'bg-white/5' : '')
+  const sectionClass = 'relative py-16 md:py-20 px-4 ' + (alternate ? 'bg-white/5' : '')
   const headingId = id + '-heading'
 
   return (
@@ -23,7 +23,7 @@ export const StorySection = ({ id, title, children, delay = 0, alternate = false
         <Reveal delay={delay}>
           <h2
             id={headingId}
-            className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-12 text-center"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-8 md:mb-12 text-center"
           >
             {title}
           </h2>

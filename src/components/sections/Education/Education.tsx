@@ -6,7 +6,7 @@ import { EducationHighlights } from './EducationHighlights'
 
 export const Education = () => {
   return (
-    <section id="education">
+    <section id="education" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="default"

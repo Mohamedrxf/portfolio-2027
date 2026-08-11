@@ -6,7 +6,7 @@ import { ScrollIndicator } from '@/components/ui/ScrollIndicator'
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden" aria-label="Hero section">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden scroll-mt-16" aria-label="Hero section">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Subtle gradient background */}
@@ -39,7 +39,7 @@ export const Hero = () => {
 
       {/* Content */}
       <AnimatedSection
-        spacing="xl"
+        spacing="none"
         background="default"
         withContainer={true}
         containerPadding="lg"

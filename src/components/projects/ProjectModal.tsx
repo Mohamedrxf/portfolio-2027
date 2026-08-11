@@ -66,7 +66,7 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl mx-4"
         onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >

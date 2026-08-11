@@ -117,11 +117,11 @@ export const ProjectShowcase = ({
 
       {/* Sort Controls */}
       <AnimatedContainer delay={0.3}>
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-6 px-4">
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-4 py-2 rounded-lg text-sm font-medium border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer"
+            className="px-4 py-2 rounded-lg text-sm font-medium border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer w-full max-w-xs"
             aria-label="Sort projects"
           >
             <option value="date-desc">Newest First</option>
@@ -133,7 +133,7 @@ export const ProjectShowcase = ({
       </AnimatedContainer>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
         {filteredProjects.map((project, index) => (
           <AnimatedContainer key={project.id} delay={0.4 + index * 0.1}>
             <ProjectCard3D

@@ -15,7 +15,7 @@ export const ProjectBackground = ({ className = '' }: ProjectBackgroundProps) =>
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   const { renderer, scene, camera, resize } = useThree({
-    canvas: canvasRef.current || undefined,
+    canvas: canvasRef as React.RefObject<HTMLCanvasElement>,
     enableControls: false,
     cameraType: 'perspective',
     rendererConfig: {
@@ -128,7 +128,7 @@ export const ProjectBackground = ({ className = '' }: ProjectBackgroundProps) =>
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [resize]);
+  }, [resize, canvasRef]);
 
   if (!isDesktop || prefersReducedMotion) {
     return null;

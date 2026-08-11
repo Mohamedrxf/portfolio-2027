@@ -19,7 +19,7 @@ export const AchievementCard = ({
   delay,
 }: AchievementCardProps) => {
   return (
-    <AnimatedCard delay={delay} cardVariant="default" className="h-full">
+    <AnimatedCard delay={delay} cardVariant="default" className="h-full hover:shadow-lg transition-shadow duration-300">
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-3">

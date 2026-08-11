@@ -3,6 +3,12 @@
 @import './themes/light.css';
 @import './animations.css';
 
+/* Prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* Dark theme override */
 [data-theme='dark'] {
   --color-background: var(--color-neutral-950);

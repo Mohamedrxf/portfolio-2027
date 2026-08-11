@@ -23,7 +23,7 @@ export const ProjectFilters = ({
   onFeaturedToggle,
 }: ProjectFiltersProps) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 px-4">
       {/* Category Filters */}
       <AnimatedContainer delay={0.2}>
         <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Project categories">
