@@ -7,7 +7,7 @@ import { ContactMap } from './ContactMap'
 
 export const Contact = () => {
   return (
-    <section id="contact">
+    <section id="contact" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="surface"

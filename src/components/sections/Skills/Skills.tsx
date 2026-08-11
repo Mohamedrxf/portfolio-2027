@@ -32,7 +32,7 @@ export const Skills = () => {
   }
 
   return (
-    <section id="skills">
+    <section id="skills" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="default"
@@ -61,7 +61,7 @@ export const Skills = () => {
           onCategoryChange={setActiveCategory}
         />
 
-        <div className="h-[600px] w-full rounded-lg overflow-hidden border border-border/20 bg-card/50 backdrop-blur-sm">
+        <div className="h-[400px] sm:h-[500px] md:h-[600px] w-full rounded-lg overflow-hidden border border-border/20 bg-card/50 backdrop-blur-sm">
           <SkillsGalaxy
             onSkillSelect={handleSkillSelect}
             onSkillHover={handleSkillHover}

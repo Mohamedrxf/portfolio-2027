@@ -6,7 +6,7 @@ import { CertificationFilters } from './CertificationFilters'
 
 export const Certifications = () => {
   return (
-    <section id="certifications">
+    <section id="certifications" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="surface"

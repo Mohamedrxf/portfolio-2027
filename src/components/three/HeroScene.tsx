@@ -68,7 +68,8 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     const runtimeConfig = getRuntimeConfig();
     if (!runtimeConfig.supports.webGL) {
       console.error('WebGL is not supported');
-      setError('WebGL is not supported in this browser');
+      // Defer setError to avoid setState in effect
+      setTimeout(() => setError('WebGL is not supported in this browser'), 0);
       return;
     }
 
@@ -139,6 +140,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
       setScene(null);
       setIsInitialized(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

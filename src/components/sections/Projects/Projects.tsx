@@ -9,7 +9,7 @@ export const Projects = () => {
   useProjects()
 
   return (
-    <section id="projects">
+    <section id="projects" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="default"

@@ -10,6 +10,7 @@ import { forwardRef } from 'react'
 import { motion, HTMLMotionProps } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useMagnetic } from '@/hooks'
+import { useMediaQuery } from '@/hooks'
 import { ANIMATION_CONSTANTS } from '@/lib/constants/animations'
 
 export interface MagneticButtonProps extends Omit<HTMLMotionProps<'button'>, 'whileHover' | 'whileTap'> {
@@ -35,9 +36,10 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     },
     externalRef
   ) => {
+    const isTouchDevice = useMediaQuery('(hover: none) and (pointer: coarse)')
     const magneticRef = useMagnetic({
       strength: strength || ANIMATION_CONSTANTS.magnetic.strength,
-      disabled: buttonDisabled,
+      disabled: buttonDisabled || isTouchDevice,
     })
 
     const variants = {

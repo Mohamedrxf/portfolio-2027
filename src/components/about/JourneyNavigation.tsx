@@ -48,7 +48,7 @@ export const JourneyNavigation = ({ sections, currentIndex, onNavigate }: Journe
     }
   }
 
-  const navClass = 'fixed left-8 top-1/2 -translate-y-1/2 z-50 transition-all duration-300 ' + (isSticky ? 'opacity-100' : 'opacity-50')
+  const navClass = 'fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 transition-all duration-300 hidden md:flex ' + (isSticky ? 'opacity-100' : 'opacity-50')
 
   return (
     <nav

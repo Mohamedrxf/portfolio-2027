@@ -71,21 +71,6 @@ export const ContactForm = () => {
     setFormState('loading')
 
     try {
-      // TODO: Integrate EmailJS here
-      // Example implementation:
-      // import emailjs from '@emailjs/browser'
-      // await emailjs.send(
-      //   'YOUR_SERVICE_ID',
-      //   'YOUR_TEMPLATE_ID',
-      //   {
-      //     from_name: formData.name,
-      //     from_email: formData.email,
-      //     subject: formData.subject,
-      //     message: formData.message,
-      //   },
-      //   'YOUR_PUBLIC_KEY'
-      // )
-
       // Simulate API call for now
       await new Promise(resolve => setTimeout(resolve, 2000))
 
@@ -112,7 +97,7 @@ export const ContactForm = () => {
 
   return (
     <SpotlightCard className="h-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10">
-      <div className="space-y-6">
+      <div className="space-y-6 p-4 md:p-6">
         {formState === 'success' ? (
           <div className="text-center py-8">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">

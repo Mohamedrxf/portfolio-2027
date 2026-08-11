@@ -10,6 +10,17 @@ import { GalaxyInteraction } from './GalaxyInteraction';
 import { GalaxyControls } from './GalaxyControls';
 import type { Skill } from '@/data/skills';
 
+// Category colors (defined outside component to avoid recreation)
+const categoryColors: Record<string, string> = {
+  'Programming': '#3b82f6',
+  'Frontend': '#10b981',
+  'Backend': '#f59e0b',
+  'Cloud & DevOps': '#8b5cf6',
+  'Networking': '#ef4444',
+  'AI & Security': '#ec4899',
+  'Development Tools': '#06b6d4',
+};
+
 interface SkillsGalaxyProps {
   className?: string;
   onSkillSelect?: (skill: Skill | null) => void;
@@ -30,10 +41,10 @@ export const SkillsGalaxy = ({ className = '', onSkillSelect, onSkillHover }: Sk
   const galaxyCameraRef = useRef<GalaxyCamera | null>(null);
   const interactionRef = useRef<GalaxyInteraction | null>(null);
   const controlsRef = useRef<GalaxyControls | null>(null);
-  
+
   // Use existing Three.js infrastructure
   const { renderer, scene, camera, resize } = useThree({
-    canvas: canvasRef.current || undefined,
+    canvas: canvasRef as React.RefObject<HTMLCanvasElement>,
     enableControls: false,
     cameraType: 'perspective',
     rendererConfig: {
@@ -51,17 +62,6 @@ export const SkillsGalaxy = ({ className = '', onSkillSelect, onSkillHover }: Sk
       far: 1000,
     },
   });
-
-  // Category colors
-  const categoryColors: Record<string, string> = {
-    'Programming': '#3b82f6',
-    'Frontend': '#10b981',
-    'Backend': '#f59e0b',
-    'Cloud & DevOps': '#8b5cf6',
-    'Networking': '#ef4444',
-    'AI & Security': '#ec4899',
-    'Development Tools': '#06b6d4',
-  };
 
   // Detect device type
   useEffect(() => {
@@ -240,12 +240,12 @@ export const SkillsGalaxy = ({ className = '', onSkillSelect, onSkillHover }: Sk
       <canvas
         ref={canvasRef}
         className="w-full h-full block"
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: deviceType === 'mobile' ? 'auto' : 'none' }}
       />
       <div
         ref={labelsContainerRef}
         className="absolute inset-0 pointer-events-none overflow-hidden"
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: deviceType === 'mobile' ? 'auto' : 'none' }}
       />
     </div>
   );

@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/refs */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';
@@ -8,7 +10,7 @@ import { createPerspectiveCamera, createOrthographicCamera, type CameraResult } 
 import { createOrbitControls, type ControlsResult } from '../controls';
 
 export interface UseThreeConfig {
-  canvas?: HTMLCanvasElement;
+  canvas?: HTMLCanvasElement | React.RefObject<HTMLCanvasElement>;
   enableControls?: boolean;
   cameraType?: 'perspective' | 'orthographic';
   rendererConfig?: Parameters<typeof createRenderer>[0];
@@ -27,7 +29,7 @@ export interface UseThreeResult {
 
 export function useThree(config: UseThreeConfig = {}): UseThreeResult {
   const {
-    canvas,
+    canvas: canvasInput,
     enableControls = false,
     cameraType = 'perspective',
     rendererConfig,
@@ -41,16 +43,20 @@ export function useThree(config: UseThreeConfig = {}): UseThreeResult {
   const cameraRef = useRef<CameraResult | null>(null);
   const controlsRef = useRef<ControlsResult | null>(null);
 
-  useEffect(() => {
-    if (!canvas) return;
+  // Handle canvas ref or direct canvas element
+  const isCanvasRef = canvasInput && 'current' in canvasInput;
+  const canvasElement = isCanvasRef ? (canvasInput as React.RefObject<HTMLCanvasElement>).current : canvasInput as HTMLCanvasElement | undefined;
 
-    const rendererResult = createRenderer({ ...rendererConfig, canvas });
+  useEffect(() => {
+    if (!canvasElement) return;
+
+    const rendererResult = createRenderer({ ...rendererConfig, canvas: canvasElement });
     rendererRef.current = rendererResult;
 
     const sceneResult = createScene(sceneConfig);
     sceneRef.current = sceneResult;
 
-    const cameraResult = cameraType === 'perspective' 
+    const cameraResult = cameraType === 'perspective'
       ? createPerspectiveCamera(cameraConfig as Parameters<typeof createPerspectiveCamera>[0])
       : createOrthographicCamera(cameraConfig as Parameters<typeof createOrthographicCamera>[0]);
     cameraRef.current = cameraResult;
@@ -60,7 +66,7 @@ export function useThree(config: UseThreeConfig = {}): UseThreeResult {
       controlsResult = createOrbitControls({
         ...controlsConfig,
         camera: cameraResult.camera,
-        domElement: canvas,
+        domElement: canvasElement,
       });
       controlsRef.current = controlsResult;
     }
@@ -70,13 +76,13 @@ export function useThree(config: UseThreeConfig = {}): UseThreeResult {
       sceneResult.dispose();
       cameraResult.dispose();
       controlsResult?.dispose();
-      
+
       rendererRef.current = null;
       sceneRef.current = null;
       cameraRef.current = null;
       controlsRef.current = null;
     };
-  }, [canvas, enableControls, cameraType, rendererConfig, sceneConfig, cameraConfig, controlsConfig]);
+  }, [canvasElement, enableControls, cameraType, rendererConfig, sceneConfig, cameraConfig, controlsConfig]);
 
   const resize = useCallback((width: number, height: number): void => {
     rendererRef.current?.resize(width, height);

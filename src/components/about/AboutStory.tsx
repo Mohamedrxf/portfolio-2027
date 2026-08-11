@@ -75,10 +75,10 @@ export const AboutStory = () => {
         <StorySection id="hello" title="Hello" delay={0}>
           <Slide direction="up" delay={0.1}>
             <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-6xl md:text-8xl font-bold text-[var(--color-text-primary)] mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-[var(--color-text-primary)] mb-6">
                 {personalInfo.tagline}
               </h1>
-              <p className="text-2xl md:text-3xl text-[var(--color-text-secondary)]">
+              <p className="text-xl md:text-2xl lg:text-3xl text-[var(--color-text-secondary)]">
                 {personalInfo.name}
               </p>
             </div>

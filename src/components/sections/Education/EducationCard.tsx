@@ -21,7 +21,7 @@ export const EducationCard = ({
   delay,
 }: EducationCardProps) => {
   return (
-    <AnimatedCard delay={delay} cardVariant="default" className="h-full">
+    <AnimatedCard delay={delay} cardVariant="default" className="h-full hover:shadow-lg transition-shadow duration-300">
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
           <div>

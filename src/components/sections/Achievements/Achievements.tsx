@@ -7,7 +7,7 @@ import { AchievementGrid } from './AchievementGrid'
 
 export const Achievements = () => {
   return (
-    <section id="achievements">
+    <section id="achievements" className="scroll-mt-16">
       <AnimatedSection
         spacing="xl"
         background="surface"
