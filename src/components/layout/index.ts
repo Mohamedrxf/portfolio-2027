@@ -10,6 +10,7 @@ export { MobileNavigation } from './MobileNavigation'
 export { HamburgerButton } from './HamburgerButton'
 export { MobileDrawer } from './MobileDrawer'
 export { Backdrop } from './Backdrop'
+export { SmoothScrollProvider } from './SmoothScrollProvider'
 
 // Footer sub-components
 export { FooterBrand, FooterNavigation, FooterSocials, FooterCopyright } from './Footer/index'

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { AnimatedCard } from '@/components/animations/AnimatedCard'
+import { SpotlightCard } from '@/components/animations/SpotlightCard'
+import { MagneticButton } from '@/components/animations/MagneticButton'
 import { Input } from '@/components/ui/Input'
 import { TextArea } from '@/components/ui/TextArea'
-import { Button } from '@/components/ui/Button'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -111,7 +111,7 @@ export const ContactForm = () => {
   }
 
   return (
-    <AnimatedCard delay={0.3} cardVariant="default" className="h-full">
+    <SpotlightCard className="h-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10">
       <div className="space-y-6">
         {formState === 'success' ? (
           <div className="text-center py-8">
@@ -136,9 +136,9 @@ export const ContactForm = () => {
             <p className="text-[var(--color-text-secondary)] mb-6">
               Thank you for reaching out. I'll get back to you as soon as possible.
             </p>
-            <Button variant="primary" size="md" onClick={resetForm}>
+            <MagneticButton variant="primary" size="md" onClick={resetForm}>
               Send Another Message
-            </Button>
+            </MagneticButton>
           </div>
         ) : formState === 'error' ? (
           <div className="text-center py-8">
@@ -163,9 +163,9 @@ export const ContactForm = () => {
             <p className="text-[var(--color-text-secondary)] mb-6">
               There was an error sending your message. Please try again or contact me directly via email.
             </p>
-            <Button variant="primary" size="md" onClick={resetForm}>
+            <MagneticButton variant="primary" size="md" onClick={resetForm}>
               Try Again
-            </Button>
+            </MagneticButton>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -217,7 +217,7 @@ export const ContactForm = () => {
               disabled={formState === 'loading'}
             />
 
-            <Button
+            <MagneticButton
               variant="primary"
               size="md"
               fullWidth
@@ -250,10 +250,10 @@ export const ContactForm = () => {
               ) : (
                 'Send Message'
               )}
-            </Button>
+            </MagneticButton>
           </form>
         )}
       </div>
-    </AnimatedCard>
+    </SpotlightCard>
   )
 }

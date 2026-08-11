@@ -1,6 +1,6 @@
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
+import { MagneticButton } from '@/components/animations'
 import { Heading } from '@/components/ui/Heading'
-import { Button } from '@/components/ui/Button'
 import { ContactInfo } from './ContactInfo'
 import { ContactSocials } from './ContactSocials'
 import { usePortfolio } from '@/hooks'
@@ -30,9 +30,9 @@ export const ContactContent = () => {
       </AnimatedContainer>
 
       <AnimatedContainer delay={0.18}>
-        <Button 
-          variant="primary" 
-          size="md" 
+        <MagneticButton
+          variant="primary"
+          size="md"
           onClick={downloadResume}
           className="w-full sm:w-auto"
           disabled={!portfolio.resume}
@@ -51,7 +51,7 @@ export const ContactContent = () => {
             />
           </svg>
           Download Resume
-        </Button>
+        </MagneticButton>
       </AnimatedContainer>
 
       <ContactInfo />

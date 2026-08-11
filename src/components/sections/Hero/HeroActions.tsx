@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button'
+import { MagneticButton } from '@/components/animations'
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
 import { useSocials } from '@/hooks'
 
@@ -8,19 +9,19 @@ export const HeroActions = () => {
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
       <AnimatedContainer delay={0.1}>
-        <Button 
-          variant="primary" 
+        <MagneticButton
+          variant="primary"
           size="lg"
           onClick={() => window.location.href = '#projects'}
           aria-label="View my projects"
         >
           View My Work
-        </Button>
+        </MagneticButton>
       </AnimatedContainer>
 
       <AnimatedContainer delay={0.2}>
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           size="lg"
           onClick={() => window.location.href = '#contact'}
           aria-label="Contact me"

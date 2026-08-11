@@ -1,2 +1,31 @@
 /* Global animation styles */
-/* Placeholder for global animation styles */
+
+/* Magnetic effect styles */
+.style-magnetic {
+  will-change: transform;
+}
+
+/* Spotlight effect styles */
+.style-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--spotlight-active, 0);
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    circle at var(--spotlight-x, -1000px) var(--spotlight-y, -1000px),
+    var(--spotlight-color, rgba(255, 255, 255, 0.1)),
+    transparent var(--spotlight-size, 400px)
+  );
+  border-radius: inherit;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .style-magnetic,
+  .style-spotlight::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}

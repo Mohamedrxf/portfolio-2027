@@ -1,6 +1,6 @@
 import { AnimatedHeading } from '@/components/animations/AnimatedHeading'
 import { StaggerContainer } from '@/components/animations/StaggerContainer'
-import { AnimatedCard } from '@/components/animations/AnimatedCard'
+import { SpotlightCard } from '@/components/animations/SpotlightCard'
 import { usePortfolio } from '@/hooks'
 
 export const AboutQuickFacts = () => {
@@ -59,11 +59,9 @@ export const AboutQuickFacts = () => {
       <StaggerContainer stagger={0.1} delayChildren={0.2}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list">
           {quickFacts.map((fact) => (
-            <AnimatedCard
+            <SpotlightCard
               key={fact.label}
-              delay={0}
-              cardVariant="hoverable"
-              className="h-full"
+              className="h-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10"
             >
               <div className="space-y-3">
                 <div className="w-10 h-10 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center text-[var(--color-primary)]" aria-hidden="true">
@@ -78,7 +76,7 @@ export const AboutQuickFacts = () => {
                   </p>
                 </div>
               </div>
-            </AnimatedCard>
+            </SpotlightCard>
           ))}
         </div>
       </StaggerContainer>

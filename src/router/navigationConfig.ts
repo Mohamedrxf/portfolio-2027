@@ -1,8 +1,6 @@
 // Navigation configuration
 // Centralized navigation items for the application
 
-import { routes } from './routes'
-
 export interface NavItemConfig {
   label: string
   path: string
