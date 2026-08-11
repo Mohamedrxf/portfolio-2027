@@ -128,6 +128,19 @@ export const ContactInfo = () => {
             }
           }
 
+          const getContactLink = (type: string, value: string) => {
+            switch (type) {
+              case 'email':
+                return `mailto:${value}`
+              case 'phone':
+                return `tel:${value}`
+              case 'location':
+                return `https://maps.google.com/?q=${encodeURIComponent(value)}`
+              default:
+                return undefined
+            }
+          }
+
           return (
             <div key={contact.label} className="flex items-start gap-3">
               <div className="w-10 h-10 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center flex-shrink-0">
@@ -138,9 +151,20 @@ export const ContactInfo = () => {
                   {contact.label}
                 </h4>
                 <div className="flex items-center gap-2">
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    {contact.value}
-                  </p>
+                  {getContactLink(contact.type, contact.value) ? (
+                    <a
+                      href={getContactLink(contact.type, contact.value)}
+                      className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+                      target={contact.type === 'location' ? '_blank' : undefined}
+                      rel={contact.type === 'location' ? 'noopener noreferrer' : undefined}
+                    >
+                      {contact.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      {contact.value}
+                    </p>
+                  )}
                   {contact.type === 'email' && (
                     <button
                       onClick={() => copyEmailToClipboard(contact.value)}

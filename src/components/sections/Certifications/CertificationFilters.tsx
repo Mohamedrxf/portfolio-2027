@@ -1,12 +1,16 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
 import { Button } from '@/components/ui/Button'
 import { motion } from 'framer-motion'
 import { useCertifications } from '@/hooks'
 
-export const CertificationFilters = ({ onFilterChange }: { onFilterChange: (filter: string) => void }) => {
+interface CertificationFiltersProps {
+  onFilterChange: (filter: string) => void
+  activeFilter: string
+}
+
+export const CertificationFilters = ({ onFilterChange, activeFilter }: CertificationFiltersProps) => {
   const { certifications } = useCertifications()
-  const [activeFilter, setActiveFilter] = useState('All')
 
   const categories = useMemo(() => {
     const categoryMap = new Map<string, number>()
@@ -22,7 +26,6 @@ export const CertificationFilters = ({ onFilterChange }: { onFilterChange: (filt
   }, [certifications])
 
   const handleFilterClick = (category: string) => {
-    setActiveFilter(category)
     onFilterChange(category)
   }
 

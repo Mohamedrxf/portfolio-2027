@@ -1,6 +1,13 @@
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
+import { usePortfolio } from '@/hooks'
 
 export const ContactMap = () => {
+  const { getContactByType } = usePortfolio()
+
+  const location = getContactByType('location')?.value || 'Chennai, India'
+  const email = getContactByType('email')?.value || 'mohamedrafeeqkhanrafeeq@gmail.com'
+  const phone = getContactByType('phone')?.value || '7358179896'
+
   return (
     <AnimatedContainer delay={0.4}>
       <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6">
@@ -29,7 +36,7 @@ export const ContactMap = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-[var(--color-text-primary)]">Location</h3>
-              <p className="text-sm text-[var(--color-text-secondary)]">Remote / Worldwide</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">{location}</p>
             </div>
           </div>
 
@@ -51,7 +58,12 @@ export const ContactMap = () => {
             </div>
             <div>
               <h3 className="text-sm font-medium text-[var(--color-text-primary)]">Email</h3>
-              <p className="text-sm text-[var(--color-text-secondary)]">Available upon request</p>
+              <a 
+                href={`mailto:${email}`}
+                className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {email}
+              </a>
             </div>
           </div>
 
@@ -67,13 +79,18 @@ export const ContactMap = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                 />
               </svg>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-[var(--color-text-primary)]">Response Time</h3>
-              <p className="text-sm text-[var(--color-text-secondary)]">Within 24-48 hours</p>
+              <h3 className="text-sm font-medium text-[var(--color-text-primary)]">Phone</h3>
+              <a 
+                href={`tel:${phone}`}
+                className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {phone}
+              </a>
             </div>
           </div>
         </div>

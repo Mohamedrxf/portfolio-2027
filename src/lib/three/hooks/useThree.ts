@@ -1,6 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/refs */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three-stdlib';

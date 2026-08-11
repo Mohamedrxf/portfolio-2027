@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { AnimatedHeading } from '@/components/animations/AnimatedHeading'
 import { Heading } from '@/components/ui/Heading'
@@ -6,6 +7,8 @@ import { AchievementStats } from './AchievementStats'
 import { AchievementGrid } from './AchievementGrid'
 
 export const Achievements = () => {
+  const [activeFilter, setActiveFilter] = useState('All')
+
   return (
     <section id="achievements" className="scroll-mt-16">
       <AnimatedSection
@@ -23,9 +26,12 @@ export const Achievements = () => {
 
         <AchievementStats />
 
-        <AchievementFilters />
+        <AchievementFilters 
+          onFilterChange={setActiveFilter} 
+          activeFilter={activeFilter} 
+        />
 
-        <AchievementGrid />
+        <AchievementGrid activeFilter={activeFilter} />
       </div>
     </AnimatedSection>
     </section>

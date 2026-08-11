@@ -23,9 +23,9 @@ export const HeroContent = () => {
 
       <AnimatedText as="div" variant="slide-up" delay={0.3}>
         <div className="flex items-center gap-3 flex-wrap">
-          <Heading level={2} size="2xl" className="text-[var(--color-text-secondary)] font-normal">
+          <p className="text-2xl text-[var(--color-text-secondary)] font-normal">
             {personalInfo.role}
-          </Heading>
+          </p>
           <Badge variant="primary" size="md" className="animate-pulse">
             {personalInfo.availability}
           </Badge>

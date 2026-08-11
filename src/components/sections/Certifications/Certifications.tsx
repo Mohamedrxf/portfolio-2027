@@ -23,7 +23,10 @@ export const Certifications = () => {
           </Heading>
         </AnimatedHeading>
 
-        <CertificationFilters onFilterChange={setActiveFilter} />
+        <CertificationFilters 
+          onFilterChange={setActiveFilter} 
+          activeFilter={activeFilter} 
+        />
 
         <CertificationGrid activeFilter={activeFilter} />
       </div>
