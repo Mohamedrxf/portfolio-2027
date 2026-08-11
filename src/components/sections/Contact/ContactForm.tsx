@@ -156,7 +156,7 @@ export const ContactForm = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               label="Name"
-              placeholder="Your name"
+              placeholder="Enter your name"
               type="text"
               name="name"
               value={formData.name}
@@ -168,7 +168,7 @@ export const ContactForm = () => {
 
             <Input
               label="Email"
-              placeholder="your.email@example.com"
+              placeholder="Enter your email"
               type="email"
               name="email"
               value={formData.email}

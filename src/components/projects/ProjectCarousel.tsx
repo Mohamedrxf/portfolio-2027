@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { AnimatedContainer } from '@/components/animations/AnimatedContainer';
 import { cn } from '@/lib/utils';
 
@@ -18,43 +19,46 @@ export const ProjectCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const childrenLength = useMemo(() => children.length, [children.length]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? children.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? childrenLength - 1 : prev - 1));
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev === children.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === childrenLength - 1 ? 0 : prev + 1));
   };
 
   // Auto-play functionality
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!autoPlay || isPaused) return;
 
     const interval = setInterval(() => {
-      goToNext();
+      setCurrentIndex((prev) => (prev === childrenLength - 1 ? 0 : prev + 1));
     }, autoPlayInterval);
 
     return () => clearInterval(interval);
-  }, [autoPlay, autoPlayInterval, isPaused, currentIndex]);
+  }, [autoPlay, autoPlayInterval, isPaused, childrenLength]);
 
   // Keyboard navigation
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
-        goToPrevious();
+        setCurrentIndex((prev) => (prev === 0 ? childrenLength - 1 : prev - 1));
       } else if (e.key === 'ArrowRight') {
-        goToNext();
+        setCurrentIndex((prev) => (prev === childrenLength - 1 ? 0 : prev + 1));
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [childrenLength]);
 
   if (children.length === 0) return null;
 

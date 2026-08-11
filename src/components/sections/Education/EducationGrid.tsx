@@ -15,6 +15,7 @@ export const EducationGrid = () => {
           description={edu.description}
           achievements={edu.achievements || []}
           gpa={edu.gpa || 'N/A'}
+          location={edu.location}
           delay={0.2 + index * 0.1}
         />
       ))}
