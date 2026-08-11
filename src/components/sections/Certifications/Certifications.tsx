@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AnimatedSection } from '@/components/animations/AnimatedSection'
 import { AnimatedHeading } from '@/components/animations/AnimatedHeading'
 import { Heading } from '@/components/ui/Heading'
@@ -5,6 +6,8 @@ import { CertificationGrid } from './CertificationGrid'
 import { CertificationFilters } from './CertificationFilters'
 
 export const Certifications = () => {
+  const [activeFilter, setActiveFilter] = useState('All')
+
   return (
     <section id="certifications" className="scroll-mt-16">
       <AnimatedSection
@@ -20,9 +23,9 @@ export const Certifications = () => {
           </Heading>
         </AnimatedHeading>
 
-        <CertificationFilters />
+        <CertificationFilters onFilterChange={setActiveFilter} />
 
-        <CertificationGrid />
+        <CertificationGrid activeFilter={activeFilter} />
       </div>
     </AnimatedSection>
     </section>

@@ -26,13 +26,18 @@ export const FeaturedProject = () => {
         )}
 
         <div className="space-y-4 flex flex-col justify-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="primary" size="sm">
               Featured
             </Badge>
             <Badge variant="outline" size="sm">
               {featuredProject.status}
             </Badge>
+            {featuredProject.award && (
+              <Badge variant="warning" size="sm">
+                🏆 {featuredProject.award}
+              </Badge>
+            )}
           </div>
 
           <h3 className="text-2xl font-bold text-[var(--color-text-primary)]">
@@ -52,26 +57,15 @@ export const FeaturedProject = () => {
           </div>
 
           <div className="flex gap-3 pt-2">
-            {featuredProject.github && (
-              <a
-                href={featuredProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-4 py-2 text-base font-medium border-2 border-[var(--color-border)] bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-border)] rounded-md transition-colors"
-                aria-label="View GitHub repository"
-              >
-                GitHub
-              </a>
-            )}
             {featuredProject.url && (
               <a
                 href={featuredProject.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-4 py-2 text-base font-medium bg-[var(--color-primary)] text-[var(--color-text-inverse)] hover:bg-[var(--color-primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] rounded-md transition-colors"
-                aria-label="View live demo"
+                aria-label="View GitHub repository"
               >
-                Live Demo
+                GitHub
               </a>
             )}
           </div>

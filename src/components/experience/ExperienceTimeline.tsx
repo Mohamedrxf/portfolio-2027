@@ -4,8 +4,6 @@ import { useReducedMotion } from '@/hooks'
 import { TimelineCard } from './TimelineCard'
 import { TimelineLine } from './TimelineLine'
 import { TimelineIndicator } from './TimelineIndicator'
-import { TimelineProgress } from './TimelineProgress'
-import { TimelineNavigation } from './TimelineNavigation'
 import { TimelineBackground } from './TimelineBackground'
 
 export const ExperienceTimeline = () => {
@@ -14,14 +12,6 @@ export const ExperienceTimeline = () => {
   const prefersReducedMotion = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState(0)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
-  const handleNavigate = useCallback((index: number) => {
-    setActiveIndex(index)
-    const cardElement = document.getElementById(`experience-card-${index}`)
-    if (cardElement) {
-      cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-  }, [])
 
   const createMouseEnterHandler = useCallback((index: number) => {
     return () => setHoveredIndex(index)
@@ -50,7 +40,7 @@ export const ExperienceTimeline = () => {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initial check
+    handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [experiences.length, prefersReducedMotion])
@@ -63,24 +53,14 @@ export const ExperienceTimeline = () => {
     <TimelineBackground>
       <div
         ref={containerRef}
-        className="relative max-w-4xl mx-auto px-4 py-8"
+        className="relative max-w-5xl mx-auto px-4 py-12"
         role="list"
         aria-label="Professional experience timeline"
       >
-        <TimelineNavigation
-          items={experiences}
-          currentIndex={activeIndex}
-          onNavigate={handleNavigate}
-        />
-
-        <div className="flex items-center gap-4 mb-8">
-          <TimelineProgress currentIndex={activeIndex} totalItems={experiences.length} />
-        </div>
-
         <div className="relative">
           <TimelineLine totalItems={experiences.length} activeIndex={activeIndex} />
 
-          <div className="space-y-8 md:space-y-12">
+          <div className="space-y-8 md:space-y-16">
             {experiences.map((experience, index) => (
               <div
                 key={experience.id}
@@ -93,18 +73,22 @@ export const ExperienceTimeline = () => {
                 `}
                 data-timeline-card
               >
-                <div data-timeline-indicator>
+                <div 
+                  className="absolute left-0 top-6 md:left-1/2 md:-translate-x-1/2 z-10"
+                  data-timeline-indicator
+                >
                   <TimelineIndicator
                     isActive={activeIndex === index || hoveredIndex === index}
                   />
                 </div>
 
-                <div className="md:ml-8">
+                <div className="md:ml-8 lg:ml-16">
                   <TimelineCard
                     experience={experience}
                     isActive={activeIndex === index || hoveredIndex === index}
                     onMouseEnter={createMouseEnterHandler(index)}
                     onMouseLeave={handleMouseLeave}
+                    index={index}
                   />
                 </div>
               </div>

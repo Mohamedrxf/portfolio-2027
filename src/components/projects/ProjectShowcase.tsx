@@ -113,6 +113,7 @@ export const ProjectShowcase = ({
         onCategoryChange={handleCategoryChange}
         onTechnologyChange={handleTechnologyChange}
         onFeaturedToggle={handleFeaturedToggle}
+        projects={projects}
       />
 
       {/* Sort Controls */}

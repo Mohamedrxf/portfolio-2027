@@ -45,13 +45,18 @@ export const ProjectCard3D = ({ project, onClick }: ProjectCard3DProps) => {
               />
               
               {/* Featured badge */}
-              {project.featured && (
-                <div className="absolute top-3 right-3">
+              <div className="absolute top-3 right-3 flex gap-2">
+                {project.featured && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
                     Featured
                   </span>
-                </div>
-              )}
+                )}
+                {project.award && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                    🏆 Award
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Title and status */}
@@ -82,7 +87,6 @@ export const ProjectCard3D = ({ project, onClick }: ProjectCard3DProps) => {
               </span>
               <ProjectActions
                 url={project.url}
-                github={project.github}
               />
             </div>
           </div>
