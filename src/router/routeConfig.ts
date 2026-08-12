@@ -17,6 +17,12 @@ const Experience = lazy(() =>
 const Certifications = lazy(() =>
   import('@/pages/Certifications').then((module) => ({ default: module.Certifications }))
 );
+const Education = lazy(() =>
+  import('@/pages/Education').then((module) => ({ default: module.Education }))
+);
+const Achievements = lazy(() =>
+  import('@/pages/Achievements').then((module) => ({ default: module.Achievements }))
+);
 const Contact = lazy(() =>
   import('@/pages/Contact').then((module) => ({ default: module.Contact }))
 );
@@ -48,6 +54,14 @@ export const routeConfig = [
   {
     path: routes.certifications,
     Component: Certifications,
+  },
+  {
+    path: routes.education,
+    Component: Education,
+  },
+  {
+    path: routes.achievements,
+    Component: Achievements,
   },
   {
     path: routes.contact,
