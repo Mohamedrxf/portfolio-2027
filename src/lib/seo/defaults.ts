@@ -21,7 +21,7 @@ export const seoDefaults: SEODefaults = {
   titleTemplate: '%s | Portfolio 2027',
   defaultTitle: 'Portfolio 2027',
   defaultDescription:
-    'A modern portfolio showcasing projects, skills, and professional experience.',
+    'Portfolio of Mohamed Rafeeq Khan A, a Computer Science Engineering student and software developer specializing in full-stack development, AI/ML, cybersecurity, and problem solving.',
   keywords: ['portfolio', 'developer', 'projects', 'skills', 'experience'],
   author: 'Mohamed Rafeeq Khan A',
   language: 'en',

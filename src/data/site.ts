@@ -69,7 +69,7 @@ export const site: Site = {
   ],
   seo: {
     title: 'Mohamed Rafeeq Khan A - Software Engineering Student',
-    description: 'Portfolio of a Computer Science Engineering student with experience in full-stack development, AI/ML, and distributed systems.',
+    description: 'Portfolio of Mohamed Rafeeq Khan A, a Computer Science Engineering student and software developer specializing in full-stack development, AI/ML, cybersecurity, and problem solving.',
     keywords: ['Software Engineer', 'Full Stack Developer', 'React', 'Python', 'FastAPI', 'AI/ML', 'Cybersecurity', 'Node.js', 'TypeScript'],
     ogImage: undefined,
     twitterHandle: undefined,
