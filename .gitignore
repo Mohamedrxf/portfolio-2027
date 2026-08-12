@@ -49,3 +49,4 @@ Thumbs.db
 # Misc
 *.min.js
 *.min.css
+.vercel
