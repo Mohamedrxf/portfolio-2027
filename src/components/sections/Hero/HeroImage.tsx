@@ -1,120 +1,115 @@
-import { AnimatedContainer } from '@/components/animations/AnimatedContainer'
-import { Badge } from '@/components/ui/Badge'
-import { usePortfolio, useSkills } from '@/hooks'
+import { useState } from 'react';
+import { usePortfolio, useSkills } from '@/hooks';
+
+// Drop your photo at: public/assets/images/hero/portrait.jpg
+const PORTRAIT_SRC = '/assets/images/hero/portrait.jpg';
 
 export const HeroImage = () => {
-  const { stats, personalInfo } = usePortfolio()
-  const { getTopSkills } = useSkills()
+  const { personalInfo, stats } = usePortfolio();
+  const { getTopSkills } = useSkills();
 
-  const topSkills = getTopSkills(6)
-  const availability = personalInfo.availability
+  const topSkills = getTopSkills(6);
+  const availability = personalInfo.availability;
+  const [imageError, setImageError] = useState(false);
+  const showImage = !imageError;
+
+  const initials = personalInfo.name
+    .split(' ')
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('');
 
   return (
-    <AnimatedContainer delay={0.4} className="flex justify-center lg:justify-end relative">
-      <div className="relative w-full max-w-md aspect-square">
-        {/* Premium Tech Visual */}
-        <div className="w-full h-full rounded-2xl overflow-hidden relative bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-background)] border border-[var(--color-border)] shadow-2xl">
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/20 via-transparent to-[var(--color-secondary)]/20 animate-pulse" />
-          </div>
+    <div className="relative w-full max-w-[480px] aspect-[4/5] mx-auto lg:mx-0">
+      <div className="absolute inset-0 rounded-3xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]/60 backdrop-blur-md shadow-2xl">
+        {/* Portrait */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {showImage ? (
+            <img
+              src={PORTRAIT_SRC}
+              alt={personalInfo.name}
+              loading="eager"
+              decoding="async"
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-elevated)]">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-cyan)] flex items-center justify-center text-4xl font-black text-white shadow-2xl">
+                {initials}
+              </div>
+              <p className="mt-6 text-[var(--color-text-tertiary)] text-xs font-mono tracking-widest uppercase">
+                Add portrait.jpg
+              </p>
+            </div>
+          )}
 
-          {/* Network/grid pattern */}
-          <div 
-            className="absolute inset-0 opacity-[0.05]"
+          <div
+            className="absolute inset-0 pointer-events-none"
             style={{
-              backgroundImage: `
-                radial-gradient(circle at 25% 25%, var(--color-primary) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, var(--color-secondary) 1px, transparent 1px)
-              `,
-              backgroundSize: '32px 32px'
+              background:
+                'linear-gradient(180deg, transparent 30%, rgba(12,12,12,0.4) 70%, rgba(12,12,12,0.85) 100%)',
             }}
           />
-
-          {/* Central tech composition */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative w-48 h-48">
-              {/* Outer ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-[var(--color-primary)]/30 animate-spin" style={{ animationDuration: '20s' }} />
-              
-              {/* Middle ring */}
-              <div className="absolute inset-4 rounded-full border border-[var(--color-secondary)]/40 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
-              
-              {/* Inner glow */}
-              <div className="absolute inset-8 rounded-full bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-secondary)]/20 blur-xl" />
-              
-              {/* Central icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  {/* Code brackets */}
-                  <div className="text-6xl font-bold text-[var(--color-primary)]/80">
-                    {'<'}
-                  </div>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-[var(--color-secondary)]/80">
-                    {'/'}
-                  </div>
-                  <div className="text-6xl font-bold text-[var(--color-primary)]/80 ml-2">
-                    {'>'}
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating nodes */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-3 h-3 rounded-full bg-[var(--color-primary)] shadow-lg shadow-[var(--color-primary)]/50 animate-pulse" />
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 w-3 h-3 rounded-full bg-[var(--color-secondary)] shadow-lg shadow-[var(--color-secondary)]/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
-              <div className="absolute left-0 top-1/2 -translate-x-2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--color-primary)] shadow-lg shadow-[var(--color-primary)]/50 animate-pulse" style={{ animationDelay: '1s' }} />
-              <div className="absolute right-0 top-1/2 translate-x-2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--color-secondary)] shadow-lg shadow-[var(--color-secondary)]/50 animate-pulse" style={{ animationDelay: '1.5s' }} />
-            </div>
-          </div>
-
-          {/* Corner accents */}
-          <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[var(--color-primary)]/50 rounded-tl-lg" />
-          <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[var(--color-secondary)]/50 rounded-tr-lg" />
-          <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[var(--color-secondary)]/50 rounded-bl-lg" />
-          <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[var(--color-primary)]/50 rounded-br-lg" />
-
-          {/* Subtle scan line effect */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--color-primary)]/5 to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(34,211,238,0.25) 0%, transparent 40%, rgba(59,130,246,0.25) 100%)',
+              mixBlendMode: 'screen',
+            }}
+          />
         </div>
 
-        {/* Floating technology badges */}
-        {topSkills.length > 0 && topSkills.map((skill, index) => (
-          <AnimatedContainer
-            key={skill.id}
-            delay={0.6 + index * 0.1}
-            className={`absolute hidden sm:block ${index % 2 === 0 ? 'right-[-5%]' : 'left-[-5%]'}`}
-            style={{
-              top: `${10 + (index % 3) * 25}%`,
-            }}
-          >
-            <Badge variant="secondary" size="sm" className="shadow-lg">
-              {skill.name}
-            </Badge>
-          </AnimatedContainer>
-        ))}
+        <div className="absolute top-4 left-4 w-10 h-10 border-l-2 border-t-2 border-[var(--color-cyan)]/60 rounded-tl-lg" />
+        <div className="absolute top-4 right-4 w-10 h-10 border-r-2 border-t-2 border-[var(--color-accent)]/60 rounded-tr-lg" />
+        <div className="absolute bottom-4 left-4 w-10 h-10 border-l-2 border-b-2 border-[var(--color-accent)]/60 rounded-bl-lg" />
+        <div className="absolute bottom-4 right-4 w-10 h-10 border-r-2 border-b-2 border-[var(--color-cyan)]/60 rounded-br-lg" />
 
-        {/* Experience badge */}
+        <div className="absolute bottom-5 left-5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-[var(--color-border)]">
+          <span className="relative flex h-2 w-2">
+            <span
+              className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-success)] opacity-60 animate-ping"
+              style={{ animationDuration: '2s' }}
+            />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-success)]" />
+          </span>
+          <span className="text-xs font-mono tracking-wide text-white">{availability}</span>
+        </div>
+
         {stats.length > 0 && (
-          <AnimatedContainer
-            delay={0.9}
-            className="absolute top-4 right-4"
-          >
-            <Badge variant="primary" size="md" className="shadow-lg">
-              {stats[0]?.value}+ {stats[0]?.label}
-            </Badge>
-          </AnimatedContainer>
+          <div className="absolute top-5 right-5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-[var(--color-border)]">
+            <span className="text-xs font-mono text-white">
+              <span className="font-bold text-[var(--color-cyan)]">{stats[0]?.value}</span>{' '}
+              <span className="text-[var(--color-text-secondary)]">{stats[0]?.label}</span>
+            </span>
+          </div>
         )}
-
-        {/* Availability badge */}
-        <AnimatedContainer
-          delay={1.0}
-          className="absolute bottom-4 left-4"
-        >
-          <Badge variant="success" size="md" className="shadow-lg animate-pulse">
-            {availability}
-          </Badge>
-        </AnimatedContainer>
       </div>
-    </AnimatedContainer>
-  )
-}
+
+      {topSkills.length > 0 &&
+        topSkills.slice(0, 5).map((skill, index) => {
+          const positions = [
+            '-left-6 top-[15%]',
+            '-left-4 top-[45%]',
+            '-right-6 top-[20%]',
+            '-right-4 top-[55%]',
+            'right-[-2%] bottom-[15%]',
+          ];
+          return (
+            <div
+              key={skill.id}
+              className={`absolute ${positions[index] || ''} px-3 py-2 rounded-full bg-[var(--color-surface)]/90 backdrop-blur-md border border-[var(--color-border)] shadow-xl animate-float-loop`}
+              style={{ animationDelay: `${index * 0.6}s` }}
+            >
+              <span className="text-xs font-mono text-[var(--color-text-primary)] font-semibold">
+                {skill.name}
+              </span>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
+
+export default HeroImage;

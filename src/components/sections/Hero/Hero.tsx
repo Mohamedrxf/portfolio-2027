@@ -1,61 +1,73 @@
-import { AnimatedSection } from '@/components/animations/AnimatedSection'
-import { HeroContent } from './HeroContent'
-import { HeroImage } from './HeroImage'
-import { HeroStats } from './HeroStats'
-import { ScrollIndicator } from '@/components/ui/ScrollIndicator'
+import { HeroScene } from '@/components/three';
+import { HeroContent } from './HeroContent';
+import { HeroImage } from './HeroImage';
+import { HeroStats } from './HeroStats';
 
 export const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden scroll-mt-16" aria-label="Hero section">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-background)] via-[var(--color-surface)] to-[var(--color-background)]" />
-        
-        {/* Grid pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden bg-[var(--color-bg)] scroll-mt-16"
+      aria-label="Hero section"
+    >
+      {/* 3D background scene */}
+      <div className="absolute inset-0 z-[var(--z-index-hero-scene)]">
+        <HeroScene />
+      </div>
+
+      {/* Subtle vignette + grid overlay */}
+      <div
+        className="absolute inset-0 z-[var(--z-index-hero-scene)] pointer-events-none"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 40%, transparent 0%, rgba(12,12,12,0.7) 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage: `
               linear-gradient(to right, var(--color-text-primary) 1px, transparent 1px),
               linear-gradient(to bottom, var(--color-text-primary) 1px, transparent 1px)
             `,
-            backgroundSize: '64px 64px'
+            backgroundSize: '64px 64px',
           }}
         />
-        
-        {/* Noise overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E")'
-          }}
-        />
-        
-        {/* Glow accents */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--color-primary)] opacity-10 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[var(--color-secondary)] opacity-10 blur-3xl rounded-full" />
       </div>
 
       {/* Content */}
-      <AnimatedSection
-        spacing="none"
-        background="default"
-        withContainer={true}
-        containerPadding="lg"
-        className="relative z-10 bg-transparent"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <HeroContent />
-          <HeroImage />
+      <div className="relative z-[var(--z-index-hero-content)] min-h-screen flex flex-col">
+        <div className="flex-1 flex items-center">
+          <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 py-8 lg:py-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <HeroContent />
+              </div>
+              <div className="order-1 lg:order-2">
+                <HeroImage />
+              </div>
+            </div>
+          </div>
         </div>
-        <HeroStats />
-      </AnimatedSection>
+
+        <div className="w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16 pb-8">
+          <HeroStats />
+        </div>
+      </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <ScrollIndicator />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[var(--z-index-hero-content)] pointer-events-none">
+        <div className="flex flex-col items-center gap-2 text-[var(--color-text-tertiary)]">
+          <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-[var(--color-accent)] to-transparent animate-pulse" />
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Hero;

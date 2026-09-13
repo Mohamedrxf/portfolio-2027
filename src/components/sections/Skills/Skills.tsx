@@ -1,76 +1,66 @@
-import { useState } from 'react'
-import { AnimatedSection } from '@/components/animations/AnimatedSection'
-import { AnimatedHeading } from '@/components/animations/AnimatedHeading'
-import { Heading } from '@/components/ui/Heading'
-import { SkillCategoryTabs } from './SkillCategoryTabs'
-import { CategoryStatistics } from './CategoryStatistics'
-import { FeaturedSkills } from './FeaturedSkills'
-import { SkillsByCategory } from './SkillsByCategory'
-import { SkillsGalaxy } from '@/components/three'
-import { useSkills } from '@/hooks'
-import type { Skill } from '@/data/skills'
+import { useState } from 'react';
+import { AnimatedSection } from '@/components/animations/AnimatedSection';
+import { Heading } from '@/components/ui/Heading';
+import { SkillCategoryTabs } from './SkillCategoryTabs';
+import { CategoryStatistics } from './CategoryStatistics';
+import { FeaturedSkills } from './FeaturedSkills';
+import { SkillsByCategory } from './SkillsByCategory';
+import { SkillsGalaxy } from '@/components/three';
+import { useSkills } from '@/hooks';
+import type { Skill } from '@/data/skills';
 
 export const Skills = () => {
-  const { skills, skillCategories, filterSkillsByCategory, getSkillsByLevel } = useSkills()
-  const [activeCategory, setActiveCategory] = useState('all')
+  const { skills, skillCategories, filterSkillsByCategory, getSkillsByLevel } = useSkills();
+  const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredSkills = activeCategory === 'all' 
-    ? skills 
-    : filterSkillsByCategory(activeCategory)
+  const filteredSkills = activeCategory === 'all' ? skills : filterSkillsByCategory(activeCategory);
 
-  const expertSkills = getSkillsByLevel(5)
-  const maxYears = Math.max(...skills.map(s => s.years || 0))
+  const expertSkills = getSkillsByLevel(5);
+  const maxYears = Math.max(...skills.map((s) => s.years || 0));
 
   const handleSkillSelect = (skill: Skill | null) => {
     if (skill) {
-      setActiveCategory(skill.category)
+      setActiveCategory(skill.category);
     }
-  }
-
-  const handleSkillHover = (_skill: Skill | null) => {
-    // Optional: handle hover state
-  }
+  };
 
   return (
-    <section id="skills" className="scroll-mt-16">
-      <AnimatedSection
-        spacing="xl"
-        background="default"
-        withContainer={true}
-        containerPadding="lg"
-      >
-      <div className="space-y-12">
-        <AnimatedHeading delay={0.1}>
-          <Heading level={2} size="4xl" align="center">
-            Skills & Expertise
-          </Heading>
-        </AnimatedHeading>
+    <section id="skills" className="scroll-mt-16 bg-[var(--color-bg)]">
+      <AnimatedSection spacing="xl" background="default" withContainer={true} containerPadding="lg">
+        <div className="space-y-12">
+          <div className="text-center space-y-3">
+            <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--color-accent)]">
+              Expertise
+            </span>
+            <Heading level={2} size="4xl" className="text-white">
+              Skills & Expertise
+            </Heading>
+          </div>
 
-        <CategoryStatistics
-          totalSkills={skills.length}
-          expertSkills={expertSkills.length}
-          categories={skillCategories.length}
-          yearsOfExperience={maxYears}
-        />
-
-        <FeaturedSkills />
-
-        <SkillCategoryTabs
-          categories={skillCategories}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-        />
-
-        <div className="h-[400px] sm:h-[500px] md:h-[600px] w-full rounded-lg overflow-hidden border border-border/20 bg-card/50 backdrop-blur-sm">
-          <SkillsGalaxy
-            onSkillSelect={handleSkillSelect}
-            onSkillHover={handleSkillHover}
+          <CategoryStatistics
+            totalSkills={skills.length}
+            expertSkills={expertSkills.length}
+            categories={skillCategories.length}
+            yearsOfExperience={maxYears}
           />
-        </div>
 
-        <SkillsByCategory skills={filteredSkills} />
-      </div>
-    </AnimatedSection>
+          <FeaturedSkills />
+
+          <SkillCategoryTabs
+            categories={skillCategories}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
+
+          <div className="h-[420px] sm:h-[520px] md:h-[640px] w-full rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]/40 backdrop-blur-sm">
+            <SkillsGalaxy onSkillSelect={handleSkillSelect} onSkillHover={() => {}} />
+          </div>
+
+          <SkillsByCategory skills={filteredSkills} />
+        </div>
+      </AnimatedSection>
     </section>
-  )
-}
+  );
+};
+
+export default Skills;
