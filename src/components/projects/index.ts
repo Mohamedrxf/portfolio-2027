@@ -1,5 +1,6 @@
 export { ProjectShowcase } from './ProjectShowcase';
 export { ProjectCard3D } from './ProjectCard3D';
+export { ProjectCardPremium } from './ProjectCardPremium';
 export { ProjectPreview } from './ProjectPreview';
 export { ProjectStack } from './ProjectStack';
 export { ProjectActions } from './ProjectActions';

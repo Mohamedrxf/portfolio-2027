@@ -1,31 +1,322 @@
-/* Global animation styles */
+/* Premium 3D Developer Portfolio - Animations & Keyframes */
 
-/* Magnetic effect styles */
-.style-magnetic {
-  will-change: transform;
-}
-
-/* Spotlight effect styles */
-.style-spotlight::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: var(--spotlight-active, 0);
-  transition: opacity 0.3s ease;
-  background: radial-gradient(
-    circle at var(--spotlight-x, -1000px) var(--spotlight-y, -1000px),
-    var(--spotlight-color, rgba(255, 255, 255, 0.1)),
-    transparent var(--spotlight-size, 400px)
-  );
-  border-radius: inherit;
-}
-
-/* Reduced motion support */
+/* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
-  .style-magnetic,
-  .style-spotlight::before {
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reduced-motion] .parallax,
+  [data-reduced-motion] .marquee-track,
+  [data-reduced-motion] .float-loop,
+  [data-reduced-motion] .float-loop-slow {
+    animation: none !important;
+  }
+}
+
+/* ===== Hero entrance ===== */
+@keyframes heroTitleReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes heroTitleGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes heroPortraitReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroBadgePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+/* ===== Marquee ===== */
+@keyframes marquee-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.marquee-track-right {
+  animation: marquee-right 28s linear infinite;
+}
+.marquee-track-left {
+  animation: marquee-left 32s linear infinite;
+}
+
+/* ===== Floating loops ===== */
+@keyframes float-loop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes float-loop-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate(6deg);
+  }
+}
+
+@keyframes float-loop-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(10px, -12px);
+  }
+  66% {
+    transform: translate(-8px, 8px);
+  }
+}
+
+@keyframes float-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ===== Network / packets ===== */
+@keyframes packet-travel {
+  0% {
+    opacity: 0;
+    transform: translateX(-2px) scale(0.4);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.4);
+  }
+}
+
+@keyframes led-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes led-blink-fast {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== Scroll reveal ===== */
+@keyframes scrollRevealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollRevealFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollRevealScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Card stack ===== */
+@keyframes cardStackIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Button ===== */
+@keyframes buttonGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px 2px rgba(59, 130, 246, 0.25);
+  }
+}
+
+/* ===== Background grid ===== */
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 64px 64px;
+  }
+}
+
+/* ===== Aurora / glow ===== */
+@keyframes auroraShift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ===== Text character reveal ===== */
+@keyframes charReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Terminal cursor ===== */
+@keyframes terminalBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ===== Scanline ===== */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ===== Section label ===== */
+@keyframes labelReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== Utility: respect reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track-right,
+  .marquee-track-left,
+  .float-loop,
+  .float-loop-slow,
+  .float-loop-drift,
+  .float-subtle,
+  .led-blink,
+  .led-blink-fast,
+  .packet-travel,
+  .aurora-shift,
+  .glow-pulse,
+  .grid-drift {
     animation: none !important;
   }
 }

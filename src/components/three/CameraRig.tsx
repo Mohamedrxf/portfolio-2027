@@ -13,8 +13,13 @@ interface CameraRigProps {
 
 export function CameraRig({ width, height, mousePosition, onCameraReady }: CameraRigProps) {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-  const targetPositionRef = useRef(new THREE.Vector3(0, 0, 8));
-  const currentPositionRef = useRef(new THREE.Vector3(0, 0, 8));
+  const targetPositionRef = useRef(new THREE.Vector3(0, 0, 7.5));
+  const currentPositionRef = useRef(new THREE.Vector3(0, 0, 7.5));
+  const mouseRef = useRef(mousePosition);
+
+  useEffect(() => {
+    mouseRef.current = mousePosition;
+  });
 
   useEffect(() => {
     const cameraResult = createPerspectiveCamera({
@@ -22,7 +27,7 @@ export function CameraRig({ width, height, mousePosition, onCameraReady }: Camer
       aspect: width / height,
       near: 0.1,
       far: 100,
-      position: new THREE.Vector3(0, 0, 8),
+      position: new THREE.Vector3(0, 0, 7.5),
       lookAt: new THREE.Vector3(0, 0, 0),
     });
 
@@ -37,10 +42,9 @@ export function CameraRig({ width, height, mousePosition, onCameraReady }: Camer
   useEffect(() => {
     const camera = cameraRef.current;
     if (!camera) return;
-
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-  }, [width, height, onCameraReady]);
+  }, [width, height]);
 
   useEffect(() => {
     const camera = cameraRef.current;
@@ -53,16 +57,14 @@ export function CameraRig({ width, height, mousePosition, onCameraReady }: Camer
       const deltaTime = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
 
-      const parallaxStrength = 0.5;
-      const targetX = mousePosition.x * parallaxStrength;
-      const targetY = mousePosition.y * parallaxStrength;
-
-      targetPositionRef.current.set(targetX, targetY, 8);
+      const m = mouseRef.current;
+      const parallaxStrength = 0.45;
+      targetPositionRef.current.set(m.x * parallaxStrength, m.y * parallaxStrength * 0.6, 7.5);
 
       dampVector(
         currentPositionRef.current,
         targetPositionRef.current,
-        3,
+        4,
         deltaTime,
         currentPositionRef.current
       );
@@ -78,7 +80,7 @@ export function CameraRig({ width, height, mousePosition, onCameraReady }: Camer
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mousePosition]);
+  }, []);
 
   return null;
 }

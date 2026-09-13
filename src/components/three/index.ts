@@ -6,6 +6,8 @@ export { GalaxyCamera } from './GalaxyCamera';
 export { GalaxyInteraction } from './GalaxyInteraction';
 export { GalaxyControls } from './GalaxyControls';
 export { HeroScene } from './HeroScene';
+export { NetworkTopology } from './NetworkTopology';
+export { PortraitEnvironment } from './PortraitEnvironment';
 
 export type { SkillNodeConfig } from './SkillNode';
 export type { SkillConnection } from './SkillConnections';

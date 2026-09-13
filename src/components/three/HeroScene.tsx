@@ -8,13 +8,15 @@ import { FloatingParticles } from './FloatingParticles';
 import { Lighting } from './Lighting';
 import { CameraRig } from './CameraRig';
 import { MouseParallax } from './MouseParallax';
+import { PortraitEnvironment } from './PortraitEnvironment';
 import { useMediaQuery } from '@/hooks';
 
 interface HeroSceneProps {
   className?: string;
+  portraitSrc?: string;
 }
 
-export function HeroScene({ className = '' }: HeroSceneProps) {
+export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -26,7 +28,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   const rendererResultRef = useRef<ReturnType<typeof createRenderer> | null>(null);
   const isMountedRef = useRef(true);
   const initializationRef = useRef(false);
-  
+
   const isMobile = useMediaQuery('(max-width: 768px)');
   const isTablet = useMediaQuery('(max-width: 1024px)');
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -42,33 +44,24 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     const handleVisibilityChange = () => {
       isTabVisible.current = !document.hidden;
     };
-
     document.addEventListener('visibilitychange', handleVisibilityChange);
-
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
   useEffect(() => {
-    // Prevent double initialization in React StrictMode
-    if (initializationRef.current) {
-      return;
-    }
+    if (initializationRef.current) return;
     initializationRef.current = true;
 
     const canvas = canvasRef.current;
     if (!canvas) {
-      console.warn('Canvas element not found');
       setError('Canvas element not found');
       return;
     }
 
-    // Check WebGL support
     const runtimeConfig = getRuntimeConfig();
     if (!runtimeConfig.supports.webGL) {
-      console.error('WebGL is not supported');
-      // Defer setError to avoid setState in effect
       setTimeout(() => setError('WebGL is not supported in this browser'), 0);
       return;
     }
@@ -94,7 +87,6 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
         environment: null,
         helpers: false,
       });
-
       sceneResult.scene.background = null;
 
       rendererResultRef.current = rendererResult;
@@ -115,8 +107,6 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
 
     return () => {
       isMountedRef.current = false;
-      
-      // Clean up renderer - use the built-in dispose which includes context loss
       if (rendererResultRef.current) {
         try {
           rendererResultRef.current.dispose();
@@ -125,8 +115,6 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
         }
         rendererResultRef.current = null;
       }
-      
-      // Clean up scene
       if (scene) {
         try {
           disposeScene(scene);
@@ -134,8 +122,6 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
           console.error('Error disposing scene:', err);
         }
       }
-      
-      // Clear state
       setRenderer(null);
       setScene(null);
       setIsInitialized(false);
@@ -146,16 +132,13 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   useEffect(() => {
     const container = canvasRef.current?.parentElement;
     if (!container) return;
-
     const handleResize = () => {
       if (!isMountedRef.current) return;
       const { clientWidth, clientHeight } = container;
       setDimensions({ width: clientWidth, height: clientHeight });
     };
-
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
-
     return () => {
       resizeObserver.disconnect();
     };
@@ -180,7 +163,14 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
     let isRenderLoopMounted = true;
 
     const render = () => {
-      if (isRenderLoopMounted && isMountedRef.current && isTabVisible.current && renderer && scene && camera) {
+      if (
+        isRenderLoopMounted &&
+        isMountedRef.current &&
+        isTabVisible.current &&
+        renderer &&
+        scene &&
+        camera
+      ) {
         try {
           renderer.render(scene, camera);
         } catch (error) {
@@ -192,7 +182,6 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
         animationFrameId = requestAnimationFrame(render);
       }
     };
-
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
@@ -202,17 +191,16 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
   }, [scene, camera, renderer]);
 
   const handleCameraReady = useCallback((cam: THREE.PerspectiveCamera) => {
-    if (isMountedRef.current) {
-      setCamera(cam);
-    }
+    if (isMountedRef.current) setCamera(cam);
   }, []);
 
   const animationEnabled = !prefersReducedMotion;
 
-  // Render static placeholder if WebGL is not supported or initialization failed
   if (error || !isInitialized) {
     return (
-      <div className={`relative w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 ${className}`}>
+      <div
+        className={`relative w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 ${className}`}
+      >
         <div className="text-center p-8">
           <div className="text-[var(--color-text-secondary)] text-sm mb-2">
             {error || 'Loading 3D scene...'}
@@ -225,17 +213,20 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
 
   return (
     <div className={`relative w-full h-full ${className}`}>
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full"
-        aria-hidden="true"
-      />
+      <canvas ref={canvasRef} className="w-full h-full" aria-hidden="true" />
       {scene && isInitialized && (
         <>
           <Lighting scene={scene} />
+          <PortraitEnvironment
+            scene={scene}
+            portraitSrc={portraitSrc}
+            enabled={animationEnabled}
+            mousePosition={mousePosition}
+            parallaxStrength={0.35}
+          />
           <FloatingGeometry scene={scene} enabled={animationEnabled} />
-          <FloatingParticles 
-            scene={scene} 
+          <FloatingParticles
+            scene={scene}
             enabled={animationEnabled}
             particleCount={getParticleCount()}
           />
@@ -245,10 +236,7 @@ export function HeroScene({ className = '' }: HeroSceneProps) {
             mousePosition={mousePosition}
             onCameraReady={handleCameraReady}
           />
-          <MouseParallax
-            enabled={animationEnabled}
-            onPositionChange={setMousePosition}
-          />
+          <MouseParallax enabled={animationEnabled} onPositionChange={setMousePosition} />
         </>
       )}
     </div>
