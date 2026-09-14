@@ -4,7 +4,14 @@
 @import './themes/dark.css';
 @import './animations.css';
 
-/* Prevent horizontal overflow */
+/* ============================================================
+   MOTIONSITES-STYLE PORTFOLIO — GLOBAL BASE
+   ============================================================ */
+
+/* Main wrapper: clip horizontal overflow so the marquee never causes
+   horizontal page scrolling. */
+#app,
+#root,
 html,
 body {
   overflow-x: hidden;
@@ -20,6 +27,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+   MOTION CLASSES
+   ============================================================ */
+
+/* Scroll-reactive marquee row — driven by JS, but keep the
+   willChange hint for the browser. */
+.marquee-row {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Magnetic portrait / element — active/inactive transitions are
+   toggled inline by the Magnet component. */
+.magnetic-element {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Cinematic section transition — subtle fade-up for all sections */
@@ -67,7 +94,16 @@ body {
   background: linear-gradient(90deg, var(--color-accent), transparent);
 }
 
-/* Premium dark theme override */
+/* ============================================================
+   CONTACT CTA GRADIENT
+   ============================================================ */
+.contact-cta-gradient {
+  background: linear-gradient(120deg, #7c3aed 0%, #d946ef 45%, #f97316 100%);
+}
+
+/* ============================================================
+   THEME OVERRIDES
+   ============================================================ */
 [data-theme='dark'] {
   --color-background: var(--color-neutral-950);
   --color-surface: var(--color-neutral-900);

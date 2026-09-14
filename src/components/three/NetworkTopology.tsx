@@ -5,7 +5,7 @@ import { disposeMaterial, disposeObject3D } from '@/lib/three/utils/cleanup';
 interface NodeDef {
   id: string;
   type: 'pc' | 'switch' | 'router' | 'server' | 'firewall' | 'cloud' | 'database';
-  position: [number, number, number];
+  position: number[];
   label: string;
   active?: boolean;
 }
@@ -67,7 +67,7 @@ export function NetworkTopology({
     nodes.forEach((node) => {
       const cfg = DEVICE[node.type];
       const sub = new THREE.Group();
-      sub.position.set(...node.position);
+      sub.position.set(...(node.position as [number, number, number]));
       sub.scale.setScalar(node.type === 'cloud' ? 1.35 : 1);
       sub.userData = { type: node.type, label: node.label, active: node.active ?? true };
       group.add(sub);
@@ -197,16 +197,23 @@ export function NetworkTopology({
       packetMeshesRef.current.forEach((p, i) => {
         const curve = curvesRef.current[i];
         if (!curve) return;
-        const tt = (t * 0.3 * (1 + (i % 3) * 0.25)) % 1;
+        // Different packet speeds + slight timing variation per cable
+        const speed = connections[i]?.packetSpeed ?? 1.0;
+        const phase = (i * 0.7) % 1;
+        const tt = (t * 0.3 * speed + phase) % 1;
         const pt = curve.getPoint(tt);
         p.position.copy(pt);
+        // Subtle breathing scale
         p.scale.setScalar(0.5 + Math.sin(tt * Math.PI * 2) * 0.12 + 0.6);
+        // Pulse opacity as the packet travels
+        const pulse = 0.5 + 0.5 * Math.sin(tt * Math.PI * 2);
+        (p.material as THREE.MeshBasicMaterial).opacity = 0.5 + pulse * 0.45;
       });
       id = requestAnimationFrame(tick);
     };
     tick();
     return () => cancelAnimationFrame(id);
-  }, [enabled, rotationSpeed]);
+  }, [enabled, rotationSpeed, connections]);
 
   return null;
 }
