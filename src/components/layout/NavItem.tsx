@@ -1,47 +1,46 @@
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
-import { cn } from '@/lib/utils'
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export interface NavItemProps extends Omit<HTMLAttributes<HTMLAnchorElement>, 'href'> {
-  to: string
-  label: string
-  icon?: React.ReactNode
-  onClick?: () => void
+  to: string;
+  label: string;
+  icon?: React.ReactNode;
+  onClick?: () => void;
 }
 
 export const NavItem = forwardRef<HTMLAnchorElement, NavItemProps>(
   ({ to, label, icon, onClick, className, ...props }, ref) => {
-    const [isActive, setIsActive] = useState(false)
+    const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
       const handleScroll = () => {
         if (to.startsWith('#')) {
-          const sectionId = to.substring(1)
-          const section = document.getElementById(sectionId)
+          const sectionId = to.substring(1);
+          const section = document.getElementById(sectionId);
           if (section) {
-            const rect = section.getBoundingClientRect()
-            const isActive = rect.top <= 100 && rect.bottom >= 100
-            setIsActive(isActive)
+            const rect = section.getBoundingClientRect();
+            setIsActive(rect.top <= 120 && rect.bottom >= 120);
           }
         }
-      }
+      };
 
-      window.addEventListener('scroll', handleScroll, { passive: true })
-      handleScroll() // Initial check
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
 
-      return () => window.removeEventListener('scroll', handleScroll)
-    }, [to])
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, [to]);
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault()
+      e.preventDefault();
       if (to.startsWith('#')) {
-        const sectionId = to.substring(1)
-        const section = document.getElementById(sectionId)
+        const sectionId = to.substring(1);
+        const section = document.getElementById(sectionId);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth' })
+          section.scrollIntoView({ behavior: 'smooth' });
         }
       }
-      onClick?.()
-    }
+      onClick?.();
+    };
 
     return (
       <a
@@ -49,12 +48,9 @@ export const NavItem = forwardRef<HTMLAnchorElement, NavItemProps>(
         href={to}
         onClick={handleClick}
         className={cn(
-          'relative px-3 py-2 text-sm font-medium transition-colors',
-          'focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2',
-          'rounded-md cursor-pointer',
-          isActive
-            ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/10'
-            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-elevated)]',
+          'relative group px-2 py-2 text-sm font-medium tracking-wide transition-colors duration-300',
+          'focus:outline-none focus:text-[var(--color-cyan)]',
+          isActive ? 'text-white' : 'text-[var(--color-text-secondary)] hover:text-white',
           className
         )}
         {...props}
@@ -62,13 +58,16 @@ export const NavItem = forwardRef<HTMLAnchorElement, NavItemProps>(
         <span className="flex items-center gap-2">
           {icon && <span className="flex-shrink-0">{icon}</span>}
           {label}
-          {isActive && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)] rounded-full" />
-          )}
         </span>
+        <span
+          className={cn(
+            'absolute left-0 bottom-0 h-px bg-[var(--color-cyan)] transition-all duration-300',
+            isActive ? 'w-full opacity-100' : 'w-0 opacity-0'
+          )}
+        />
       </a>
-    )
+    );
   }
-)
+);
 
-NavItem.displayName = 'NavItem'
+NavItem.displayName = 'NavItem';

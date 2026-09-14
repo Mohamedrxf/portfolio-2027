@@ -1,40 +1,37 @@
-import { usePortfolio } from '@/hooks'
-import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer'
-import { Fade } from '@/components/animations/Fade'
+import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer';
 
-export const StoryHighlights = () => {
-  const { highlights } = usePortfolio()
-
+export const StoryHighlights = ({ highlights }: { highlights: any[] }) => {
   return (
     <StaggerContainer stagger={0.1} delayChildren={0.2}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="space-y-px bg-[var(--color-border)]">
         {highlights.map((highlight, index) => (
           <StaggerItem key={index}>
-            <Fade delay={index * 0.1}>
-              <div className="p-6 rounded-2xl backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center">
-                    <span className="text-[var(--color-primary)] text-xl">✦</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
-                      {highlight.title}
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                      {highlight.description}
-                    </p>
-                    {highlight.badge && (
-                      <span className="inline-block mt-3 px-3 py-1 text-xs font-medium bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-full">
-                        {highlight.badge}
-                      </span>
-                    )}
-                  </div>
+            <div className="group flex items-start gap-6 px-6 py-5 bg-[var(--color-bg)] hover:bg-[var(--color-surface)] transition-colors duration-300">
+              <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[var(--color-accent)] pt-1 w-16 flex-shrink-0">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-3 mb-1">
+                  <h3 className="text-lg font-bold text-[var(--color-text-primary)] tracking-tight">
+                    {highlight.title}
+                  </h3>
+                  {highlight.badge && (
+                    <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[var(--color-text-tertiary)] border border-[var(--color-border)] px-2 py-0.5">
+                      {highlight.badge}
+                    </span>
+                  )}
                 </div>
+                <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
+                  {highlight.description}
+                </p>
               </div>
-            </Fade>
+              <span className="text-[var(--color-text-tertiary)] group-hover:text-[var(--color-cyan)] transition-colors duration-300 flex-shrink-0">
+                ↗
+              </span>
+            </div>
           </StaggerItem>
         ))}
       </div>
     </StaggerContainer>
-  )
-}
+  );
+};

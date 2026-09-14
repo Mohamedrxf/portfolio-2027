@@ -1,12 +1,12 @@
-import { BaseEntity } from './types'
+import { BaseEntity } from './types';
 
 export interface Social extends BaseEntity {
-  platform: string
-  url: string
-  username?: string
-  icon?: string
-  visible: boolean
-  order: number
+  platform: string;
+  url: string;
+  username?: string;
+  icon?: string;
+  visible: boolean;
+  order: number;
 }
 
 export const socials: Social[] = [
@@ -19,4 +19,13 @@ export const socials: Social[] = [
     visible: true,
     order: 1,
   },
-]
+  {
+    id: 'social-2',
+    platform: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/mohamed-rafeeq-khan-278202326',
+    username: 'mohamed-rafeeq-khan',
+    icon: 'linkedin',
+    visible: true,
+    order: 2,
+  },
+];
