@@ -1,12 +1,14 @@
 import { TechMarquee } from '@/components/sections/TechMarquee';
 import { AboutStory } from '@/components/about/AboutStory';
+import { Services } from '@/components/sections/About/Services';
 
 export const About = () => {
   return (
-    <section id="about" className="scroll-mt-16 bg-[var(--color-bg)]">
+    <div className="bg-[var(--color-bg)]">
       <TechMarquee />
       <AboutStory />
-    </section>
+      <Services />
+    </div>
   );
 };
 

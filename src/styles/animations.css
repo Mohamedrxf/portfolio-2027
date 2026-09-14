@@ -320,3 +320,102 @@
     animation: none !important;
   }
 }
+
+/* ===== Cinematic editorial keyframes ===== */
+
+/* Oversized marquee — faster, larger, more design-led */
+@keyframes marquee-right-lg {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-left-lg {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.marquee-track-right-lg {
+  animation: marquee-right-lg 22s linear infinite;
+}
+
+.marquee-track-left-lg {
+  animation: marquee-left-lg 28s linear infinite;
+}
+
+/* Hero title clip reveal */
+@keyframes heroClipReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* Section title slide-up */
+@keyframes sectionTitleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Project card stack entrance */
+@keyframes projectStackIn {
+  from {
+    opacity: 0;
+    transform: translateY(80px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Editorial line draw */
+@keyframes lineDraw {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+/* Slow drift for atmospheric background */
+@keyframes driftSlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(12px, -18px, 0);
+  }
+}
+
+/* Subtle breathing glow */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}

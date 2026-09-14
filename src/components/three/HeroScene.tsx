@@ -35,9 +35,9 @@ export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
   const isTabVisible = useRef(true);
 
   const getParticleCount = useCallback(() => {
-    if (isMobile) return 100;
-    if (isTablet) return 150;
-    return 200;
+    if (isMobile) return 60;
+    if (isTablet) return 90;
+    return 130;
   }, [isMobile, isTablet]);
 
   useEffect(() => {

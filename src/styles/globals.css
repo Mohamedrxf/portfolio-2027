@@ -11,6 +11,62 @@ body {
   max-width: 100vw;
 }
 
+/* Cinematic editorial base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Cinematic section transition — subtle fade-up for all sections */
+.cinematic-section {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinematic-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Oversized display type utility */
+.display-type {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-none);
+  letter-spacing: var(--letter-spacing-tighter);
+  text-transform: uppercase;
+}
+
+/* Section label / meta */
+.section-meta {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.section-accent-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
 /* Premium dark theme override */
 [data-theme='dark'] {
   --color-background: var(--color-neutral-950);
