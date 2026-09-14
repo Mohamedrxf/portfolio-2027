@@ -1,27 +1,27 @@
-import { BaseEntity, ContactInfo } from './types'
+import { BaseEntity, ContactInfo } from './types';
 
 export interface Site extends BaseEntity {
-  name: string
-  description: string
-  url: string
-  author: string
-  contact: ContactInfo[]
-  navigation: NavigationItem[]
-  seo: SEOConfig
+  name: string;
+  description: string;
+  url: string;
+  author: string;
+  contact: ContactInfo[];
+  navigation: NavigationItem[];
+  seo: SEOConfig;
 }
 
 export interface NavigationItem {
-  label: string
-  href: string
-  order: number
+  label: string;
+  href: string;
+  order: number;
 }
 
 export interface SEOConfig {
-  title: string
-  description: string
-  keywords: string[]
-  ogImage?: string
-  twitterHandle?: string
+  title: string;
+  description: string;
+  keywords: string[];
+  ogImage?: string;
+  twitterHandle?: string;
 }
 
 export const site: Site = {
@@ -68,10 +68,23 @@ export const site: Site = {
     { label: 'Contact', href: '/contact', order: 9 },
   ],
   seo: {
-    title: 'Mohamed Rafeeq Khan A - Software Engineering Student',
-    description: 'Portfolio of Mohamed Rafeeq Khan A, a Computer Science Engineering student and software developer specializing in full-stack development, AI/ML, cybersecurity, and problem solving.',
-    keywords: ['Software Engineer', 'Full Stack Developer', 'React', 'Python', 'FastAPI', 'AI/ML', 'Cybersecurity', 'Node.js', 'TypeScript'],
+    title: 'Mohamed Rafeeq Khan A — Software Engineer',
+    description:
+      'Portfolio of Mohamed Rafeeq Khan A, a software engineer building scalable systems across full stack, AI/ML, cybersecurity, and distributed infrastructure.',
+    keywords: [
+      'Software Engineer',
+      'Full Stack Developer',
+      'React',
+      'Python',
+      'FastAPI',
+      'AI/ML',
+      'Cybersecurity',
+      'Node.js',
+      'TypeScript',
+      'Distributed Systems',
+      'Networking',
+    ],
     ogImage: undefined,
     twitterHandle: undefined,
   },
-}
+};

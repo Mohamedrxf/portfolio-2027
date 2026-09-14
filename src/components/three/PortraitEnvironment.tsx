@@ -14,14 +14,9 @@ interface PortraitEnvironmentProps {
 interface NetworkNode {
   id: string;
   type: 'pc' | 'switch' | 'router' | 'server' | 'firewall' | 'cloud' | 'database';
-  position: [number, number, number];
+  position: number[];
   label: string;
   active?: boolean;
-}
-interface NetworkConn {
-  from: string;
-  to: string;
-  packetSpeed?: number;
 }
 
 export function PortraitEnvironment({
@@ -45,27 +40,28 @@ export function PortraitEnvironment({
     return tex;
   }, [portraitSrc]);
 
-  // Cinematic network topology — realistic hardware proportions in depth
+  // Realistic technical environment — PC → SWITCH → ROUTER → FIREWALL → SERVER/CLOUD
+  // Arranged in depth so the topology reads as part of the hero artwork.
   const nodes: NetworkNode[] = useMemo(
     () => [
-      { id: 'pc', type: 'pc', position: [-3.4, 1.1, 1.6], label: 'PC', active: true },
-      { id: 'switch', type: 'switch', position: [-1.7, 0.5, 2.4], label: 'SWITCH', active: true },
-      { id: 'router', type: 'router', position: [0.0, -0.1, 2.8], label: 'ROUTER', active: true },
+      { id: 'pc', type: 'pc', position: [-3.6, 1.2, 1.8], label: 'PC', active: true },
+      { id: 'switch', type: 'switch', position: [-1.8, 0.55, 2.6], label: 'SWITCH', active: true },
+      { id: 'router', type: 'router', position: [0.0, -0.15, 2.9], label: 'ROUTER', active: true },
       {
         id: 'firewall',
         type: 'firewall',
-        position: [1.7, -0.7, 2.1],
+        position: [1.8, -0.75, 2.2],
         label: 'FIREWALL',
         active: true,
       },
-      { id: 'server', type: 'server', position: [3.2, -1.2, 1.1], label: 'SERVER', active: true },
-      { id: 'cloud', type: 'cloud', position: [0.6, 1.7, 0.2], label: 'CLOUD', active: true },
-      { id: 'db', type: 'database', position: [2.2, -0.2, 0.2], label: 'DB', active: true },
+      { id: 'server', type: 'server', position: [3.4, -1.3, 1.0], label: 'SERVER', active: true },
+      { id: 'cloud', type: 'cloud', position: [0.7, 1.8, 0.1], label: 'CLOUD', active: true },
+      { id: 'db', type: 'database', position: [2.4, -0.25, 0.1], label: 'DB', active: true },
     ],
     []
   );
 
-  const connections: NetworkConn[] = useMemo(
+  const connections = useMemo(
     () => [
       { from: 'pc', to: 'switch', packetSpeed: 1.0 },
       { from: 'switch', to: 'router', packetSpeed: 1.1 },
@@ -192,7 +188,7 @@ export function PortraitEnvironment({
       nodes={nodes}
       connections={connections}
       enabled={enabled}
-      rotationSpeed={0.015}
+      rotationSpeed={0.012}
     />
   );
 }

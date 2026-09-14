@@ -44,10 +44,7 @@ export function createRenderer(config: RendererConfig = {}): RendererResult {
     powerPreference: finalConfig.powerPreference,
   });
 
-  const clampedPixelRatio = Math.min(
-    finalConfig.pixelRatio,
-    finalConfig.maxPixelRatio
-  );
+  const clampedPixelRatio = Math.min(finalConfig.pixelRatio, finalConfig.maxPixelRatio);
   renderer.setPixelRatio(clampedPixelRatio);
 
   renderer.outputColorSpace = finalConfig.outputColorSpace;
@@ -67,7 +64,6 @@ export function createRenderer(config: RendererConfig = {}): RendererResult {
 
   const dispose = (): void => {
     renderer.dispose();
-    renderer.forceContextLoss();
   };
 
   return {

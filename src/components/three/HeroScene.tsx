@@ -107,6 +107,9 @@ export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
 
     return () => {
       isMountedRef.current = false;
+      // Reset the init guard so the component can re-initialize (e.g. under
+      // React StrictMode double-invocation, or after a transient unmount).
+      initializationRef.current = false;
       if (rendererResultRef.current) {
         try {
           rendererResultRef.current.dispose();
@@ -196,15 +199,13 @@ export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
 
   const animationEnabled = !prefersReducedMotion;
 
-  if (error || !isInitialized) {
+  if (error) {
     return (
       <div
         className={`relative w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 ${className}`}
       >
         <div className="text-center p-8">
-          <div className="text-[var(--color-text-secondary)] text-sm mb-2">
-            {error || 'Loading 3D scene...'}
-          </div>
+          <div className="text-[var(--color-text-secondary)] text-sm mb-2">{error}</div>
           <div className="w-16 h-16 mx-auto rounded-full bg-[var(--color-primary)]/20 animate-pulse" />
         </div>
       </div>

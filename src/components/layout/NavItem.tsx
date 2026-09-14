@@ -48,23 +48,17 @@ export const NavItem = forwardRef<HTMLAnchorElement, NavItemProps>(
         href={to}
         onClick={handleClick}
         className={cn(
-          'relative group px-2 py-2 text-sm font-medium tracking-wide transition-colors duration-300',
-          'focus:outline-none focus:text-[var(--color-cyan)]',
-          isActive ? 'text-white' : 'text-[var(--color-text-secondary)] hover:text-white',
+          'relative group px-2 py-2 text-sm font-medium tracking-wider uppercase transition-opacity duration-200',
+          isActive ? 'text-[#D7E2EA]' : 'text-[#D7E2EA]/70 hover:text-[#D7E2EA] hover:opacity-100',
           className
         )}
+        style={{ opacity: isActive ? 1 : 0.7 }}
         {...props}
       >
         <span className="flex items-center gap-2">
           {icon && <span className="flex-shrink-0">{icon}</span>}
           {label}
         </span>
-        <span
-          className={cn(
-            'absolute left-0 bottom-0 h-px bg-[var(--color-cyan)] transition-all duration-300',
-            isActive ? 'w-full opacity-100' : 'w-0 opacity-0'
-          )}
-        />
       </a>
     );
   }

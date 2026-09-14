@@ -2,10 +2,10 @@
 // Task 1.8 - Configure ESLint
 // Task 1.9 - Integrated Prettier
 
-import js from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import reactHooks from 'eslint-plugin-react-hooks'
-import prettierConfig from 'eslint-config-prettier'
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import reactHooks from 'eslint-plugin-react-hooks';
+import prettierConfig from 'eslint-config-prettier';
 
 export default [
   // Base JavaScript rules
@@ -83,7 +83,8 @@ export default [
       'build/**',
       '*.config.js',
       '*.config.ts',
+      '*.cjs',
       '.prettierignore',
     ],
   },
-]
+];
