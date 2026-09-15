@@ -4,17 +4,14 @@ import { FadeIn } from '@/components/motion';
  * HeroNavbar
  *
  * Minimal horizontal navbar matching the MotionSites reference structure:
- *   About / Work / Experience / Contact
+ *   MRK | About / Work / Experience / Contact
  *
  * Visual behavior:
  * - flex, justify-between
- * - uppercase, tracking-wider, medium weight
+ * - uppercase, tracking-wider
  * - color #D7E2EA
- * - responsive typography
- * - px-6, md:px-10
- * - pt-6, md:pt-8
- * - hover opacity 70%
- * - 200ms transition
+ * - hover opacity 60% with underline reveal
+ * - 300ms transition
  */
 const NAV_ITEMS = [
   { label: 'About', href: '#about' },
@@ -30,7 +27,7 @@ export const HeroNavbar = () => {
         <nav className="flex items-center justify-between" aria-label="Primary">
           <a
             href="#home"
-            className="font-[var(--font-family-display)] font-medium text-[#D7E2EA] tracking-wider text-sm md:text-base hover:opacity-70 transition-opacity duration-200"
+            className="font-[var(--font-family-display)] font-medium text-[#D7E2EA] tracking-wider text-sm md:text-base hover:opacity-60 transition-opacity duration-300"
           >
             MRK
           </a>
@@ -40,7 +37,7 @@ export const HeroNavbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="font-[var(--font-family-display)] font-medium text-[#D7E2EA] tracking-wider text-sm hover:opacity-70 transition-opacity duration-200"
+                className="font-[var(--font-family-display)] font-medium text-[#D7E2EA] tracking-wider text-sm hover:opacity-60 transition-all duration-300 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-[#D7E2EA] after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.label}
               </a>

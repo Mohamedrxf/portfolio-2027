@@ -58,7 +58,7 @@ export function CameraRig({ width, height, mousePosition, onCameraReady }: Camer
       lastTime = currentTime;
 
       const m = mouseRef.current;
-      const parallaxStrength = 0.45;
+      const parallaxStrength = 0.28;
       targetPositionRef.current.set(m.x * parallaxStrength, m.y * parallaxStrength * 0.6, 7.5);
 
       dampVector(

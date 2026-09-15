@@ -7,8 +7,7 @@ import { cn } from '@/lib/utils';
  * Reusable pill-shaped CTA matching the MotionSites reference.
  *
  * - Rounded pill
- * - Reference purple/magenta/orange gradient treatment integrated into the
- *   portfolio palette
+ * - Editorial gradient treatment — restrained silver/cyan, not cyberpunk
  * - Text: CONTACT ME
  * - Used in Hero / About / Contact where appropriate
  */
@@ -21,7 +20,7 @@ export interface ContactButtonProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const GRADIENT = 'linear-gradient(120deg, #7C3AED 0%, #D946EF 45%, #F97316 100%)';
+const GRADIENT = 'linear-gradient(120deg, #646973 0%, #8A93A2 45%, #BBCCD7 100%)';
 
 export const ContactButton = forwardRef<HTMLButtonElement, ContactButtonProps>(
   (
@@ -45,7 +44,7 @@ export const ContactButton = forwardRef<HTMLButtonElement, ContactButtonProps>(
       'inline-flex items-center justify-center gap-2.5 rounded-full font-medium uppercase tracking-widest transition-all duration-300',
       sizes[size],
       variant === 'gradient'
-        ? 'text-white shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 hover:scale-[1.03]'
+        ? 'text-white shadow-md shadow-black/20 hover:shadow-lg hover:shadow-black/30 hover:scale-[1.03]'
         : 'border-2 border-[#D7E2EA] text-[#D7E2EA] hover:bg-[#D7E2EA]/10',
       className
     );

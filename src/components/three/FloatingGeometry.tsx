@@ -86,18 +86,10 @@ export function FloatingGeometry({ scene, enabled }: FloatingGeometryProps) {
     objects.push(ring);
 
     const cubeGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.3);
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 3; i++) {
       const cube = new THREE.Mesh(cubeGeometry, accentMaterial);
-      cube.position.set(
-        randomRange(-2, 2),
-        randomRange(-1.5, 1.5),
-        randomRange(-1, 1)
-      );
-      cube.rotation.set(
-        randomRange(0, Math.PI),
-        randomRange(0, Math.PI),
-        randomRange(0, Math.PI)
-      );
+      cube.position.set(randomRange(-2, 2), randomRange(-1.5, 1.5), randomRange(-1, 1));
+      cube.rotation.set(randomRange(0, Math.PI), randomRange(0, Math.PI), randomRange(0, Math.PI));
       cube.userData = {
         originalY: cube.position.y,
         speed: randomRange(0.2, 0.5),
@@ -148,9 +140,10 @@ export function FloatingGeometry({ scene, enabled }: FloatingGeometryProps) {
           rotationSpeed: { x: number; y: number };
         };
 
-        obj.position.y = userData.originalY + 
+        obj.position.y =
+          userData.originalY +
           Math.sin(animationRef.current.time * userData.speed) * userData.amplitude;
-        
+
         obj.rotation.x += userData.rotationSpeed.x;
         obj.rotation.y += userData.rotationSpeed.y;
       });

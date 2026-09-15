@@ -16,24 +16,25 @@ export const HeroContent = () => {
     'A software engineer building scalable systems across full stack, AI/ML, cybersecurity and distributed infrastructure.';
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center w-full text-center px-6">
-      {/* Tagline */}
-      <FadeIn delay={0.1} duration={0.9} y={30}>
-        <p className="text-[#D7E2EA] font-mono text-xs sm:text-sm tracking-[0.35em] uppercase mb-8">
+    <div className="flex flex-col items-center lg:items-start space-y-6 lg:space-y-8">
+      {/* Metadata / eyebrow */}
+      <FadeIn delay={0.1} duration={0.8} y={20}>
+        <p className="text-[#D7E2EA] font-mono text-xs sm:text-sm tracking-[0.35em] uppercase">
           {personalInfo.tagline}
         </p>
       </FadeIn>
 
-      {/* Massive name — dominates the top of the viewport, two-line composition */}
-      <FadeIn delay={0.2} duration={1.0} y={60}>
+      {/* Hero name — two-line composition, controlled clamp, no overlap */}
+      <FadeIn delay={0.2} duration={1.0} y={40}>
         <h1
-          className="font-[var(--font-family-display)] font-black tracking-tight text-white leading-[0.88]"
+          className="font-[var(--font-family-display)] font-black tracking-tight text-white leading-[0.9]"
           style={{
-            fontSize: 'clamp(3.2rem, 15vw, 10rem)',
+            fontSize: 'clamp(1.8rem, 9vw, 7rem)',
             background: heroGradient,
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            textShadow: '0 2px 20px rgba(0, 0, 0, 0.25)',
           }}
         >
           <span className="block">{firstName}</span>
@@ -41,25 +42,23 @@ export const HeroContent = () => {
         </h1>
       </FadeIn>
 
-      {/* Central magnetic portrait — the dominant visual of the composition */}
-      <FadeIn delay={0.32} duration={1.0} y={40}>
-        <div className="mt-6">
-          <HeroPortrait />
-        </div>
-      </FadeIn>
-
-      {/* Bottom editorial description + CTA */}
-      <FadeIn delay={0.5} duration={0.8} y={30}>
-        <p className="text-[#D7E2EA] font-light tracking-wide leading-snug mt-8 max-w-xl text-sm sm:text-base md:text-lg uppercase">
+      {/* Description — readable, normal case, constrained width */}
+      <FadeIn delay={0.5} duration={0.8} y={20}>
+        <p className="text-[#D7E2EA] font-light tracking-wide leading-relaxed max-w-lg text-sm sm:text-base md:text-lg">
           {description}
         </p>
       </FadeIn>
 
-      <FadeIn delay={0.65} duration={0.8} y={30}>
-        <div className="mt-8">
-          <ContactButton label="CONTACT ME" href="#contact" size="lg" />
-        </div>
+      {/* CTA */}
+      <FadeIn delay={0.65} duration={0.8} y={20}>
+        <ContactButton label="CONTACT ME" href="#contact" size="lg" />
       </FadeIn>
+
+      {/* Portrait — renders in its own bounded area on mobile only.
+          On desktop the portrait is rendered in Hero.tsx's right grid column. */}
+      <div className="lg:hidden pt-4">
+        <HeroPortrait />
+      </div>
     </div>
   );
 };

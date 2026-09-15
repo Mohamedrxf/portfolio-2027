@@ -16,28 +16,28 @@ export const HeroPortrait = () => {
     .join('');
 
   return (
-    <Magnet padding={150} strength={3} className="relative inline-block">
+    <Magnet padding={120} strength={2} className="relative inline-block">
       <div
         className="relative"
         style={{
-          width: 'clamp(240px, 30vw, 460px)',
+          width: 'clamp(180px, 45vw, 420px)',
           aspectRatio: '4 / 5',
         }}
       >
-        {/* Outer atmospheric glow halo — cinematic depth */}
+        {/* Outer atmospheric glow halo — cinematic depth, restrained */}
         <div
-          className="absolute -inset-6 rounded-full pointer-events-none"
+          className="absolute -inset-5 rounded-full pointer-events-none"
           style={{
             background:
-              'radial-gradient(circle at 50% 40%, rgba(34,211,238,0.22) 0%, rgba(124,58,237,0.12) 45%, transparent 70%)',
-            filter: 'blur(32px)',
+              'radial-gradient(circle at 50% 40%, rgba(34,211,238,0.18) 0%, rgba(124,58,237,0.08) 45%, transparent 70%)',
+            filter: 'blur(28px)',
           }}
         />
 
         {/* Portrait frame — dark, rounded, light border, no card UI.
             The rounded bezel reads as an embedded cinematic object, not a
             rectangular profile card. */}
-        <div className="relative w-full h-full rounded-[40px] overflow-hidden border-2 border-[#D7E2EA]/70 bg-[#0C0C0C] shadow-2xl">
+        <div className="relative w-full h-full rounded-[36px] overflow-hidden border-2 border-[#D7E2EA]/70 bg-[#0C0C0C] shadow-2xl">
           {showImage ? (
             <img
               src={PORTRAIT_SRC}
@@ -49,10 +49,10 @@ export const HeroPortrait = () => {
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#0C0C0C]">
-              <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#22D3EE] to-[#7C3AED] flex items-center justify-center text-4xl font-black text-white shadow-2xl">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#22D3EE] to-[#7C3AED] flex items-center justify-center text-3xl font-black text-white shadow-2xl">
                 {initials}
               </div>
-              <p className="mt-6 text-[#D7E2EA]/40 text-xs font-mono tracking-widest uppercase">
+              <p className="mt-5 text-[#D7E2EA]/40 text-xs font-mono tracking-widest uppercase">
                 Add portrait.jpg
               </p>
             </div>
@@ -67,18 +67,18 @@ export const HeroPortrait = () => {
             }}
           />
           <div
-            className="absolute inset-0 pointer-events-none mix-blend-screen opacity-50"
+            className="absolute inset-0 pointer-events-none mix-blend-screen opacity-40"
             style={{
               background:
-                'linear-gradient(135deg, rgba(34,211,238,0.2) 0%, transparent 45%, rgba(124,58,237,0.2) 100%)',
+                'linear-gradient(135deg, rgba(34,211,238,0.15) 0%, transparent 45%, rgba(124,58,237,0.15) 100%)',
             }}
           />
 
           {/* Thin inner highlight line — editorial bezel accent */}
           <div
-            className="absolute inset-3 rounded-[34px] pointer-events-none"
+            className="absolute inset-3 rounded-[30px] pointer-events-none"
             style={{
-              border: '1px solid rgba(215,226,234,0.06)',
+              border: '1px solid rgba(215,226,234,0.05)',
             }}
           />
         </div>

@@ -24,7 +24,7 @@ export function PortraitEnvironment({
   portraitSrc,
   enabled = true,
   mousePosition = { x: 0, y: 0 },
-  parallaxStrength = 0.35,
+  parallaxStrength = 0.22,
 }: PortraitEnvironmentProps) {
   const planeRef = useRef<THREE.Mesh | null>(null);
   const ringRef = useRef<THREE.Mesh | null>(null);
@@ -40,8 +40,6 @@ export function PortraitEnvironment({
     return tex;
   }, [portraitSrc]);
 
-  // Realistic technical environment — PC → SWITCH → ROUTER → FIREWALL → SERVER/CLOUD
-  // Arranged in depth so the topology reads as part of the hero artwork.
   const nodes: NetworkNode[] = useMemo(
     () => [
       { id: 'pc', type: 'pc', position: [-3.6, 1.2, 1.8], label: 'PC', active: true },
@@ -76,15 +74,17 @@ export function PortraitEnvironment({
   useEffect(() => {
     if (!scene || !enabled) return;
 
-    // Portrait plane — embedded cinematic object, no card UI
-    const planeGeo = new THREE.PlaneGeometry(3.4, 4.4, 1, 1);
+    // Portrait plane — reduced size, subtle emissive, stays behind HTML portrait
+    const planeGeo = new THREE.PlaneGeometry(2.4, 3.0, 1, 1);
     const planeMat = new THREE.MeshStandardMaterial({
       color: 0x141922,
       metalness: 0.25,
       roughness: 0.5,
       emissive: 0x0ea5e9,
-      emissiveIntensity: 0.05,
+      emissiveIntensity: 0.03,
       side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.85,
     });
     const plane = new THREE.Mesh(planeGeo, planeMat);
     plane.position.set(0, 0.1, 0);
@@ -95,11 +95,11 @@ export function PortraitEnvironment({
 
     // Backdrop disc — soft atmospheric halo behind portrait
     const disc = new THREE.Mesh(
-      new THREE.CircleGeometry(2.35, 64),
+      new THREE.CircleGeometry(1.8, 64),
       new THREE.MeshBasicMaterial({
         color: 0x06080c,
         transparent: true,
-        opacity: 0.92,
+        opacity: 0.9,
         side: THREE.BackSide,
       })
     );
@@ -107,13 +107,13 @@ export function PortraitEnvironment({
     discRef.current = disc;
     scene.add(disc);
 
-    // Soft rim ring — thin metallic bezel
+    // Soft rim ring — thin metallic bezel, restrained glow
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(2.22, 0.012, 16, 96),
+      new THREE.TorusGeometry(1.72, 0.01, 16, 96),
       new THREE.MeshStandardMaterial({
         color: 0x9fb2c8,
         emissive: 0x22d3ee,
-        emissiveIntensity: 0.35,
+        emissiveIntensity: 0.18,
         metalness: 1,
         roughness: 0.18,
       })
@@ -123,13 +123,13 @@ export function PortraitEnvironment({
     ringRef.current = ring;
     scene.add(ring);
 
-    // Back glow — subtle cyan/violet wash
+    // Back glow — subtle cyan wash
     const glow = new THREE.Mesh(
-      new THREE.CircleGeometry(2.1, 32),
+      new THREE.CircleGeometry(1.6, 32),
       new THREE.MeshBasicMaterial({
         color: 0x0ea5e9,
         transparent: true,
-        opacity: 0.14,
+        opacity: 0.08,
         side: THREE.BackSide,
       })
     );
@@ -163,12 +163,12 @@ export function PortraitEnvironment({
       mat.map = texture;
       mat.emissiveMap = null;
       mat.emissive.setHex(0x0ea5e9);
-      mat.emissiveIntensity = 0.04;
+      mat.emissiveIntensity = 0.03;
       mat.needsUpdate = true;
     }
   }, [texture]);
 
-  // Subtle parallax on the portrait plane
+  // Subtle parallax on the portrait plane — restrained, stays behind typography
   useEffect(() => {
     if (!planeRef.current || !enabled) return;
     let id: number;

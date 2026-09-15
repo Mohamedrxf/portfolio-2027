@@ -9,11 +9,7 @@ interface FloatingParticlesProps {
   particleCount?: number;
 }
 
-export function FloatingParticles({ 
-  scene, 
-  enabled, 
-  particleCount = 200 
-}: FloatingParticlesProps) {
+export function FloatingParticles({ scene, enabled, particleCount = 100 }: FloatingParticlesProps) {
   const particlesRef = useRef<THREE.Points | null>(null);
   const animationRef = useRef<{ time: number }>({ time: 0 });
   const particleCountRef = useRef(particleCount);
@@ -33,7 +29,7 @@ export function FloatingParticles({
       positions[i * 3] = randomRange(-4, 4);
       positions[i * 3 + 1] = randomRange(-3, 3);
       positions[i * 3 + 2] = randomRange(-2, 2);
-      
+
       sizes[i] = randomRange(0.02, 0.08);
       speeds[i] = randomRange(0.2, 0.5);
       amplitudes[i] = randomRange(0.1, 0.3);
@@ -75,7 +71,7 @@ export function FloatingParticles({
 
       const particles = particlesRef.current;
       if (!particles) return;
-      
+
       const geometry = particles.geometry;
       const positions = geometry.attributes.position.array as Float32Array;
       const speeds = geometry.userData.speeds as Float32Array;
@@ -85,8 +81,8 @@ export function FloatingParticles({
 
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
-        positions[i3 + 1] = originalY[i3 + 1] + 
-          Math.sin(animationRef.current.time * speeds[i]) * amplitudes[i];
+        positions[i3 + 1] =
+          originalY[i3 + 1] + Math.sin(animationRef.current.time * speeds[i]) * amplitudes[i];
       }
 
       geometry.attributes.position.needsUpdate = true;

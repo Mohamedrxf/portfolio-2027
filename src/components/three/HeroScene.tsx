@@ -35,9 +35,9 @@ export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
   const isTabVisible = useRef(true);
 
   const getParticleCount = useCallback(() => {
-    if (isMobile) return 60;
-    if (isTablet) return 90;
-    return 130;
+    if (isMobile) return 30;
+    if (isTablet) return 50;
+    return 70;
   }, [isMobile, isTablet]);
 
   useEffect(() => {
@@ -223,7 +223,7 @@ export function HeroScene({ className = '', portraitSrc }: HeroSceneProps) {
             portraitSrc={portraitSrc}
             enabled={animationEnabled}
             mousePosition={mousePosition}
-            parallaxStrength={0.35}
+            parallaxStrength={0.22}
           />
           <FloatingGeometry scene={scene} enabled={animationEnabled} />
           <FloatingParticles
